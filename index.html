@@ -1,0 +1,9679 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>BuurtBank</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #dff5ff, #eee7ff);
+    color: #202840;
+}
+
+header {
+    background: linear-gradient(135deg, #1769aa, #7048c7);
+    color: white;
+    text-align: center;
+    padding: 25px;
+    box-shadow: 0 5px 20px #0003;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 42px;
+}
+
+.container {
+    width: 94%;
+    max-width: 1150px;
+    margin: 25px auto;
+}
+
+.box {
+    background: white;
+    padding: 24px;
+    margin-bottom: 20px;
+    border-radius: 22px;
+    box-shadow: 0 8px 25px #0002;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* TOP ACTIES */
+.topActions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 15px;
+}
+
+.topActions button {
+    margin: 0;
+}
+
+@media(max-width:700px) {
+    .topActions {
+        justify-content: stretch;
+    }
+
+    .topActions button {
+        flex: 1;
+    }
+}
+
+button {
+    padding: 12px 18px;
+    margin: 6px;
+    border: 0;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #1769aa, #7048c7);
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover {
+    transform: translateY(-2px);
+}
+
+input,
+select,
+textarea {
+    width: 92%;
+    max-width: 450px;
+    padding: 13px;
+    margin: 7px;
+    border: 2px solid #d8ddea;
+    border-radius: 12px;
+    font-size: 16px;
+}
+
+textarea {
+    min-height: 100px;
+}
+
+.login {
+    max-width: 500px;
+    margin: 50px auto;
+    text-align: center;
+}
+
+.loginIcon {
+    font-size: 70px;
+}
+
+.error {
+    color: #d64545;
+    font-weight: bold;
+}
+
+.success {
+    color: #239653;
+    font-weight: bold;
+}
+
+.logout {
+    background: #687080;
+}
+
+.danger {
+    background: #d64545;
+}
+
+.green {
+    background: #239653;
+}
+
+.orange {
+    background: #df8500;
+}
+
+.purple {
+    background: #7048c7;
+}
+
+.blue {
+    background: #1769aa;
+}
+
+/* WELKOM */
+
+#welcomeScreen {
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(135deg, #1769aa, #7048c7);
+    color: white;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    z-index: 9999;
+}
+
+#welcomeScreen h1 {
+    font-size: 45px;
+}
+
+.loader {
+    width: 65px;
+    height: 65px;
+    border: 7px solid #ffffff55;
+    border-top: 7px solid white;
+    border-radius: 50%;
+    animation: draaien 1s linear infinite;
+}
+
+@keyframes draaien {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* BANKKAART */
+
+.bankcard {
+    background: linear-gradient(135deg, #1769aa, #7048c7, #8c58f5);
+    color: white;
+    padding: 30px;
+    border-radius: 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 12px 30px #0003;
+}
+
+.bankLogo {
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.saldoTekst {
+    margin-top: 25px;
+    opacity: .8;
+}
+
+.saldo {
+    font-size: 48px;
+    font-weight: bold;
+}
+
+.euroOnderSaldo {
+    font-size: 18px;
+    margin-top: 5px;
+}
+
+.profilePhoto {
+    width: 90px;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 4px solid white;
+    background: #ddd;
+}
+
+.profilePhotoSmall {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid #ddd;
+}
+
+.profilePhotoBig {
+    width: 130px;
+    height: 130px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 5px solid #7048c7;
+}
+
+/* STATISTIEKEN */
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin: 20px 0;
+}
+
+.stat {
+    background: white;
+    border-radius: 18px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 6px 18px #0001;
+}
+
+.statIcon {
+    font-size: 32px;
+}
+
+.statNumber {
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+/* PERSONEN */
+
+.personGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 12px;
+    margin: 15px 0;
+}
+
+.personButton {
+    margin: 0;
+    width: 100%;
+    min-height: 75px;
+    background: #f4f6fb;
+    color: #202840;
+    border: 3px solid #d8ddea;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-align: left;
+}
+
+.personButton.selected {
+    background: linear-gradient(135deg, #1769aa, #7048c7);
+    color: white;
+}
+
+.personButton img {
+    width: 52px;
+    height: 52px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+/* MELDING */
+
+.melding {
+    background: #fff7dc;
+    border-left: 6px solid #eda900;
+    padding: 17px;
+    margin: 10px 0;
+    border-radius: 12px;
+}
+
+.messageMelding {
+    background: #eaf4ff;
+    border-left: 6px solid #1769aa;
+}
+
+.requestMelding {
+    background: #f3eaff;
+    border-left: 6px solid #7048c7;
+}
+
+/* HISTORIEK */
+
+.history {
+    background: #f5f7fc;
+    border-left: 6px solid #1769aa;
+    padding: 17px;
+    margin: 10px 0;
+    border-radius: 12px;
+}
+
+.history.positive {
+    border-left-color: #239653;
+}
+
+.history.negative {
+    border-left-color: #d64545;
+}
+
+.history.message {
+    border-left-color: #7048c7;
+}
+
+.date {
+    color: #777;
+    font-size: 13px;
+    margin-top: 7px;
+}
+
+/* ADMIN */
+
+.adminHeader {
+    background: linear-gradient(135deg, #fff0bb, #ffd994);
+    border-left: 7px solid #df8500;
+}
+
+.adminStats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+}
+
+.adminStat {
+    background: #fff8df;
+    border: 2px solid #f1d27b;
+    padding: 18px;
+    border-radius: 17px;
+    text-align: center;
+}
+
+.adminStat strong {
+    display: block;
+    font-size: 25px;
+    margin-top: 5px;
+}
+
+/* ACCOUNTS */
+
+.accountCard {
+    background: #f5f7fb;
+    padding: 15px;
+    border-radius: 15px;
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.accountLeft {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.pin {
+    font-family: monospace;
+    font-size: 18px;
+    letter-spacing: 3px;
+}
+
+/* BERICHT */
+
+.messageBox {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.messageBox img {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.messageText {
+    background: white;
+    padding: 12px;
+    border-radius: 12px;
+    margin-top: 8px;
+}
+
+/* MOBIEL */
+
+@media(max-width:700px) {
+
+    .stats,
+    .adminStats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .bankcard {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    header h1 {
+        font-size: 34px;
+    }
+
+}
+
+
+/* Account + Uitloggen helemaal in de rechterbovenhoek */
+.topActions { position: fixed !important; top: 0 !important; right: 0 !important; margin: 0 !important; padding: 0 !important; z-index: 9999 !important; display: flex !important; gap: 6px !important; }
+.topActions button { margin: 0 !important; }
+
+.kaartNummer {
+    margin-top: 18px;
+    font-size: 16px;
+    letter-spacing: 2px;
+    font-weight: 700;
+    opacity: 0.98;
+}
+
+
+#payTaxButton:disabled { opacity: .55; cursor: not-allowed; }
+</style>
+</head>
+
+<body>
+
+<header>
+
+    <h1>🏦 BuurtBank</h1>
+
+    <p>
+        De bank van de buurtkindjes 💙
+    </p>
+
+</header>
+
+
+<!-- WELKOM -->
+
+<div id="welcomeScreen">
+
+    <div style="font-size:80px">
+        🏦
+    </div>
+
+    <div class="loader"></div>
+
+    <h1 id="welcomeTitle">
+        Laden...
+    </h1>
+
+    <p>
+        Even geduld...
+    </p>
+
+</div>
+
+
+<!-- LOGIN -->
+
+<div id="loginScreen" class="container">
+
+    <div class="box login">
+
+        <div class="loginIcon">
+            💳
+        </div>
+
+        <h2>
+            Welkom bij BuurtBank!
+        </h2>
+
+        <p>
+            Kies je account en log in.
+        </p>
+
+        <select id="loginPerson">
+            <option value="">
+                -- Kies een persoon --
+            </option>
+        </select>
+
+        <br>
+
+        <input
+            id="loginPin"
+            type="password"
+            maxlength="4"
+            inputmode="numeric"
+            placeholder="🔒 Pincode"
+        >
+
+        <br>
+
+        <button onclick="login()">
+            🔓 Inloggen
+        </button>
+
+        <p id="loginMessage"></p>
+
+    </div>
+
+</div>
+
+
+<!-- NORMALE BANK -->
+
+<div id="bankScreen" class="container hidden">
+
+    <div class="bankcard">
+
+        <div>
+
+            <div class="bankLogo">
+                🏦 BuurtBank
+            </div>
+
+            <p id="welcomeText"></p>
+
+            <div class="saldoTekst">
+                Beschikbaar saldo
+            </div>
+
+            <div class="saldo">
+                <span id="saldoText">0</span>
+                Buurt
+            </div>
+
+            <div class="euroOnderSaldo">
+                💶 = €<span id="euroText">0,00</span>
+            </div>
+
+            <div class="kaartNummer">
+                💳 <span id="cardNumberText">0000 0000 0000 0000</span>
+            </div>
+
+        </div>
+
+        <img
+            id="bankPhoto"
+            class="profilePhoto"
+        >
+
+    </div>
+
+
+    <!-- MAANDELIJKSE BELASTING -->
+    <div id="taxBox" class="box">
+        <h2>🏛️ Maandelijkse belasting</h2>
+        <p>Elke maand betaal je zelf <strong>50 Buurt</strong> aan de Regering.</p>
+        <p>Dit kan <strong>alleen op de 1e dag van de maand</strong>.</p>
+        <button id="payTaxButton" onclick="payMonthlyTax()">🏛️ Betaal 50 Buurt belasting</button>
+        <p id="taxMessage"></p>
+    </div>
+
+
+    <!-- LENING -->
+    <div id="loanBox" class="box">
+        <h2>💳 Lening aanvragen</h2>
+        <p>Je kunt maximaal <strong>10.000 Buurt</strong> lenen.</p>
+        <p>Je betaalt de lening terug in <strong>20 dagelijkse delen</strong> (elke dag 1/20).</p>
+        <input id="loanAmount" type="number" min="1" max="10000" step="1" placeholder="💰 Bedrag lening">
+        <br>
+        <button id="loanButton" class="green" onclick="requestLoan()">💳 Lening aanvragen</button>
+        <p id="loanMessage"></p>
+        <div id="loanStatus"></div>
+    </div>
+
+
+    <!-- GEEN APART EURO-VAK MEER -->
+
+    <div class="stats">
+
+        <div class="stat">
+
+            <div class="statIcon">
+                💰
+            </div>
+
+            Buurt
+
+            <div
+                class="statNumber"
+                id="statSaldo"
+            >
+                0
+            </div>
+
+        </div>
+
+
+        <div class="stat">
+
+            <div class="statIcon">
+                📜
+            </div>
+
+            Historiek
+
+            <div
+                class="statNumber"
+                id="statTransactions"
+            >
+                0
+            </div>
+
+        </div>
+
+
+        <div class="stat">
+
+            <div class="statIcon">
+                🔔
+            </div>
+
+            Meldingen
+
+            <div
+                class="statNumber"
+                id="statNotifications"
+            >
+                0
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- RECHTSBOVEN: ACCOUNT + UITLOGGEN -->
+
+    <div class="topActions">
+        <button onclick="openAccount()">
+            👤 Account
+        </button>
+
+        <button class="logout" onclick="logout()">
+            🔒 Uitloggen
+        </button>
+    </div>
+
+
+    <!-- MELDINGEN -->
+
+    <div class="box">
+
+        <h2>
+            🔔 Mijn meldingen
+        </h2>
+
+        <div id="notificationsBox"></div>
+
+    </div>
+
+
+    <!-- OVERSCHRIJVEN -->
+
+    <div class="box">
+
+        <h2>
+            💸 Buurt overschrijven
+        </h2>
+
+        <p>
+            Kies naar wie je Buurt wilt sturen:
+        </p>
+
+        <div
+            id="receiverList"
+            class="personGrid"
+        ></div>
+
+        <input
+            id="transferAmount"
+            type="number"
+            min="1"
+            placeholder="💰 Aantal Buurt"
+        >
+
+        <br>
+
+        <input
+            id="transferReason"
+            placeholder="📝 Waarvoor?"
+        >
+
+        <br>
+
+        <button onclick="transferMoney()">
+            💸 Overschrijven
+        </button>
+
+        <p id="transferMessage"></p>
+
+    </div>
+
+
+    <!-- GELD VRAGEN -->
+
+    <div class="box">
+
+        <h2>
+            🙏 Geld vragen
+        </h2>
+
+        <p>
+            Kies van wie je geld wilt vragen.
+            Je kunt ook de Administrator kiezen.
+        </p>
+
+        <div
+            id="requestList"
+            class="personGrid"
+        ></div>
+
+        <input
+            id="requestAmount"
+            type="number"
+            min="1"
+            placeholder="💰 Aantal Buurt"
+        >
+
+        <br>
+
+        <textarea
+            id="requestReason"
+            placeholder="📝 Waarom vraag je geld?"
+        ></textarea>
+
+        <br>
+
+        <button onclick="requestMoney()">
+            🙏 Geld vragen
+        </button>
+
+        <p id="requestMessage"></p>
+
+    </div>
+
+
+    <!-- BERICHT STUREN -->
+
+    <div class="box">
+
+        <h2>
+            💬 Bericht sturen
+        </h2>
+
+        <p>
+            Je kunt een bericht sturen naar een andere gebruiker
+            of naar de Administrator.
+        </p>
+
+        <div
+            id="messageReceiverList"
+            class="personGrid"
+        ></div>
+
+        <textarea
+            id="messageText"
+            placeholder="💬 Typ je bericht..."
+        ></textarea>
+
+        <br>
+
+        <button onclick="sendMessage()">
+            📤 Bericht sturen
+        </button>
+
+        <p id="messageResult"></p>
+
+    </div>
+
+
+    <!-- HISTORIEK -->
+
+    <div class="box">
+
+        <h2>
+            📜 Mijn historiek
+        </h2>
+
+        <div id="historyBox"></div>
+
+    </div>
+
+
+
+</div>
+
+
+<!-- ACCOUNT -->
+
+<div
+    id="accountScreen"
+    class="container hidden"
+>
+
+    <div class="box">
+
+        <h2>
+            👤 Mijn account
+        </h2>
+
+        <div style="text-align:center">
+
+            <img
+                id="accountPhoto"
+                class="profilePhotoBig"
+            >
+
+            <h2 id="accountName"></h2>
+
+            <input
+                type="file"
+                accept="image/*"
+                onchange="changePhoto(event)"
+            >
+
+            <p id="photoMessage"></p>
+
+        </div>
+
+        <hr>
+
+        <h2>
+            🔐 Pincode wijzigen
+        </h2>
+
+        <input
+            id="oldPin"
+            type="password"
+            maxlength="4"
+            inputmode="numeric"
+            placeholder="Oude pincode"
+        >
+
+        <br>
+
+        <input
+            id="newPin"
+            type="password"
+            maxlength="4"
+            inputmode="numeric"
+            placeholder="Nieuwe pincode"
+        >
+
+        <br>
+
+        <input
+            id="newPinAgain"
+            type="password"
+            maxlength="4"
+            inputmode="numeric"
+            placeholder="Nieuwe pincode opnieuw"
+        >
+
+        <br>
+
+        <button onclick="changePin()">
+            🔐 Opslaan
+        </button>
+
+        <p id="pinMessage"></p>
+
+        <br>
+
+        <button onclick="closeAccount()">
+            ← Terug
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- ADMINISTRATOR -->
+
+<div
+    id="adminScreen"
+    class="container hidden"
+>
+
+    <div class="box adminHeader">
+
+        <h1>
+            👑 Administrator
+        </h1>
+
+        <p>
+            Welkom in het BuurtBank-beheerdersdashboard.
+        </p>
+
+    </div>
+
+
+    <!-- ADMIN DASHBOARD -->
+
+    <div class="box">
+
+        <h2>
+            📊 Administrator-dashboard
+        </h2>
+
+        <div class="adminStats">
+
+            <div class="adminStat">
+
+                🪙
+
+                <span>
+                    Totaal Buurt
+                </span>
+
+                <strong id="totalBuurt">
+                    0
+                </strong>
+
+            </div>
+
+
+            <div class="adminStat">
+
+                👥
+
+                <span>
+                    Aantal accounts
+                </span>
+
+                <strong id="totalAccounts">
+                    0
+                </strong>
+
+            </div>
+
+
+            <div class="adminStat">
+
+                🙏
+
+                <span>
+                    Open verzoeken
+                </span>
+
+                <strong id="openRequests">
+                    0
+                </strong>
+
+            </div>
+
+
+            <div class="adminStat">
+
+                📊
+
+                <span>
+                    Transacties vandaag
+                </span>
+
+                <strong id="todayTransactions">
+                    0
+                </strong>
+
+            </div>
+
+        </div>
+
+        <hr>
+
+        <h3>
+            💶 Totale waarde
+        </h3>
+
+        <strong style="font-size:30px">
+
+            €<span id="totalEuro">
+                0,00
+            </span>
+
+        </strong>
+
+    </div>
+
+
+    <!-- ADMIN BERICHTEN -->
+
+    <div class="box">
+
+        <h2>
+            💬 Mijn berichten
+        </h2>
+
+        <p>
+            Hier komen berichten binnen die naar de Administrator zijn gestuurd.
+        </p>
+
+        <div id="adminMessagesBox"></div>
+
+    </div>
+
+
+    <!-- ADMIN BERICHT STUREN -->
+
+    <div class="box">
+
+        <h2>
+            📤 Bericht sturen
+        </h2>
+
+        <div
+            id="adminMessageReceiverList"
+            class="personGrid"
+        ></div>
+
+        <textarea
+            id="adminMessageText"
+            placeholder="💬 Typ je bericht..."
+        ></textarea>
+
+        <br>
+
+        <button onclick="adminSendMessage()">
+            📤 Bericht sturen
+        </button>
+
+        <p id="adminMessageResult"></p>
+
+    </div>
+
+
+    <!-- BUURT GEVEN -->
+
+    <div class="box">
+
+        <h2>
+            💰 Buurt geven
+        </h2>
+
+        <div
+            id="adminGiveList"
+            class="personGrid"
+        ></div>
+
+        <input
+            id="adminGiveAmount"
+            type="number"
+            min="1"
+            placeholder="💰 Aantal Buurt"
+        >
+
+        <br>
+
+        <input
+            id="adminGiveReason"
+            placeholder="📝 Reden"
+        >
+
+        <br>
+
+        <button
+            class="orange"
+            onclick="adminGive()"
+        >
+            👑 Buurt geven
+        </button>
+
+        <p id="adminGiveMessage"></p>
+
+    </div>
+
+
+    <!-- GELD TERUGNEMEN -->
+
+    <div class="box">
+
+        <h2>
+            💸 Geld terugnemen
+        </h2>
+
+        <div
+            id="adminTakeList"
+            class="personGrid"
+        ></div>
+
+        <input
+            id="adminTakeAmount"
+            type="number"
+            min="1"
+            placeholder="💸 Aantal Buurt"
+        >
+
+        <br>
+
+        <input
+            id="adminTakeReason"
+            placeholder="📝 Reden"
+        >
+
+        <br>
+
+        <button
+            class="danger"
+            onclick="adminTake()"
+        >
+            💸 Buurt terugnemen
+        </button>
+
+        <p id="adminTakeMessage"></p>
+
+    </div>
+
+
+    <!-- NIEUW ACCOUNT -->
+
+    <div class="box">
+
+        <h2>
+            ➕ Nieuw account maken
+        </h2>
+
+        <input
+            id="newName"
+            placeholder="👤 Naam"
+        >
+
+        <br>
+
+        <input
+            id="newPin"
+            maxlength="4"
+            inputmode="numeric"
+            placeholder="🔐 Pincode"
+        >
+
+        <br>
+
+        <input
+            id="newBalance"
+            type="number"
+            min="0"
+            value="10000" readonly placeholder="💳 Startersbudget: 10.000 Buurt"
+        >
+
+        <br>
+
+        <button
+            class="green"
+            onclick="createAccount()"
+        >
+            ➕ Account maken
+        </button>
+
+        <p id="createMessage"></p>
+
+    </div>
+
+
+    <!-- ACCOUNTS -->
+
+    <div class="box">
+
+        <h2>
+            ✏️ Accounts aanpassen
+        </h2>
+
+        <div id="accountsList"></div>
+
+    </div>
+
+
+    <!-- VERZOEKEN -->
+
+    <div class="box">
+
+        <h2>
+            🙏 Geldverzoeken
+        </h2>
+
+        <div id="adminRequests"></div>
+
+    </div>
+
+
+    <!-- ALLE TRANSACTIES -->
+
+    <div class="box">
+
+        <h2>
+            📜 Alle transacties
+        </h2>
+
+        <div id="allTransactions"></div>
+
+    </div>
+
+
+    <!-- ALLE MELDINGEN -->
+
+    <div class="box">
+
+        <h2>
+            🔔 Alle meldingen
+        </h2>
+
+        <div id="allNotifications"></div>
+
+    </div>
+
+
+    <!-- PINCODE WIJZIGINGEN -->
+
+    <div class="box">
+
+        <h2>
+            🚨 Pincodewijzigingen
+        </h2>
+
+        <div id="pinChanges"></div>
+
+    </div>
+
+
+    <!-- MELDING NAAR IEDEREEN -->
+
+    <div class="box">
+
+        <h2>
+            📢 Melding naar iedereen
+        </h2>
+
+        <textarea
+            id="broadcastMessage"
+            placeholder="Typ je melding..."
+        ></textarea>
+
+        <br>
+
+        <button onclick="sendBroadcast()">
+            📢 Versturen
+        </button>
+
+        <p id="broadcastResult"></p>
+
+    </div>
+
+
+    <!-- ALGEMEEN BERICHT -->
+
+    <div class="box">
+
+        <h2>
+            🏦 Algemeen bericht
+        </h2>
+
+        <textarea
+            id="generalMessageInput"
+            placeholder="Bijvoorbeeld: De BuurtBank is vandaag gesloten."
+        ></textarea>
+
+        <br>
+
+        <button
+            class="purple"
+            onclick="setGeneralMessage()"
+        >
+            🏦 Bericht plaatsen
+        </button>
+
+        <button
+            class="danger"
+            onclick="removeGeneralMessage()"
+        >
+            🗑️ Verwijderen
+        </button>
+
+        <div id="currentGeneralMessage"></div>
+
+    </div>
+
+
+    <div class="box">
+
+        <button
+            class="logout"
+            onclick="logout()"
+        >
+            🔒 Uitloggen
+        </button>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* =====================================================
+   INSTELLINGEN
+===================================================== */
+
+const ADMIN_NAME = "Administrator";
+
+/*
+   De administrator-pincode blijft vast.
+*/
+const ADMIN_PIN = "9074";
+
+/*
+   40 Buurt = €1
+*/
+const BUURT_PER_EURO = 40;
+
+/* =====================================================
+   MAANDELIJKSE BELASTING
+===================================================== */
+
+const MONTHLY_TAX = 50;
+const TAX_RECEIVER = "Regering";
+
+
+/* =====================================================
+   STANDAARD FOTO
+===================================================== */
+
+const defaultPhoto =
+"data:image/svg+xml;charset=UTF-8," +
+encodeURIComponent(`
+<svg xmlns="http://www.w3.org/2000/svg"
+width="200"
+height="200">
+
+<rect
+width="200"
+height="200"
+rx="100"
+fill="#e8eaf5"/>
+
+<circle
+cx="100"
+cy="75"
+r="42"
+fill="#9aa2b8"/>
+
+<path
+d="M35 185 C40 125 160 125 165 185Z"
+fill="#9aa2b8"/>
+
+</svg>
+`);
+
+
+/* =====================================================
+   STANDAARD ACCOUNTS
+===================================================== */
+
+const defaultAccounts = {
+
+    "Milan Verhaeren": {
+        pin: "8364",
+        balance: 10000,
+        photo: "",
+        cardNumber: "0000 0000 0000 0002"
+    },
+
+    "Luna Verhaeren": {
+        pin: "5831",
+        balance: 10000,
+        photo: "",
+        cardNumber: "0000 0000 0000 0001"
+    },
+
+    "Liv de Schryver": {
+        pin: "7246",
+        balance: 10000,
+        photo: "",
+        cardNumber: "0000 0000 0000 0003"
+    },
+
+    "Lex de Schryver": {
+        pin: "3918",
+        balance: 10000,
+        photo: "",
+        cardNumber: "0000 0000 0000 0004"
+    },
+
+    "Jeroom van Deun": {
+        pin: "8462",
+        balance: 10000,
+        photo: "",
+        cardNumber: "0000 0000 0000 0005"
+    },
+
+    "Lucas Cools": {
+        pin: "6159",
+        balance: 10000,
+        photo: "",
+        cardNumber: "0000 0000 0000 0006"
+    },
+
+    "Manuel Cools": {
+        pin: "2735",
+        balance: 10000,
+        photo: "",
+        cardNumber: "0000 0000 0000 0007"
+    },
+
+    "Lukas Aderiaansen": {
+        pin: "9584",
+        balance: 10000,
+        photo: "",
+        cardNumber: "0000 0000 0000 0008"
+    },
+
+    "Kato Aderiaansen": {
+        pin: "4317",
+        balance: 10000,
+        photo: "",
+        cardNumber: "0000 0000 0000 0009"
+    },
+
+    "Mien Sevensterren": {
+        pin: "6825",
+        balance: 10000,
+        photo: "",
+        cardNumber: "0000 0000 0000 0010"
+    },
+
+    "Will Sevensterren": {
+        pin: "1479",
+        balance: 10000,
+        photo: "",
+        cardNumber: "0000 0000 0000 0011"
+    },
+
+    "Regering": {
+        pin: "2468",
+        balance: 10000,
+        photo: "",
+        cardNumber: "0000 0000 0000 0012"
+    }
+
+};
+
+
+/* =====================================================
+   DATA LADEN
+===================================================== */
+
+let accounts =
+JSON.parse(
+    localStorage.getItem("buurt_accounts")
+) || defaultAccounts;
+
+/* Zorg dat bestaande opgeslagen accounts ook altijd een bankkaartnummer hebben. */
+Object.keys(defaultAccounts).forEach(name => {
+    if (!accounts[name]) {
+        accounts[name] = { ...defaultAccounts[name] };
+    } else if (!accounts[name].cardNumber) {
+        accounts[name].cardNumber = defaultAccounts[name].cardNumber;
+    }
+});
+/* EENMALIGE STARTRESET: iedereen krijgt precies 10.000 Buurt als startersbudget. */
+const STARTER_BUDGET_VERSION = "starter_10000_v1";
+if (localStorage.getItem("buurt_starter_budget_version") !== STARTER_BUDGET_VERSION) {
+    Object.keys(accounts).forEach(name => {
+        accounts[name].balance = 0;
+        accounts[name].balance = 10000;
+        accounts[name].lastTaxMonth = null;
+    });
+    localStorage.setItem("buurt_starter_budget_version", STARTER_BUDGET_VERSION);
+}
+localStorage.setItem("buurt_accounts", JSON.stringify(accounts));
+
+
+let transactions =
+JSON.parse(
+    localStorage.getItem("buurt_transactions")
+) || {};
+
+
+let notifications =
+JSON.parse(
+    localStorage.getItem("buurt_notifications")
+) || {};
+
+
+let requests =
+JSON.parse(
+    localStorage.getItem("buurt_requests")
+) || [];
+
+
+/* LENINGEN */
+let loans =
+JSON.parse(
+    localStorage.getItem("buurt_loans")
+) || {};
+
+
+let messages =
+JSON.parse(
+    localStorage.getItem("buurt_messages")
+) || [];
+
+
+let pinChanges =
+JSON.parse(
+    localStorage.getItem("buurt_pinchanges")
+) || [];
+
+
+let generalMessage =
+localStorage.getItem("buurt_general") || "";
+
+
+/* =====================================================
+   DATA CONTROLEREN
+===================================================== */
+
+function prepareData() {
+
+    Object.keys(accounts).forEach(name => {
+
+        if (!transactions[name]) {
+            transactions[name] = [];
+        }
+
+        if (!notifications[name]) {
+            notifications[name] = [];
+        }
+
+        if (!loans[name]) {
+            loans[name] = null;
+        }
+
+        if (!accounts[name].photo) {
+            accounts[name].photo = "";
+        }
+
+    });
+
+}
+
+
+prepareData();
+
+
+/* =====================================================
+   OPSLAAN
+===================================================== */
+
+function saveData() {
+
+    localStorage.setItem(
+        "buurt_accounts",
+        JSON.stringify(accounts)
+    );
+
+    localStorage.setItem(
+        "buurt_transactions",
+        JSON.stringify(transactions)
+    );
+
+    localStorage.setItem(
+        "buurt_notifications",
+        JSON.stringify(notifications)
+    );
+
+    localStorage.setItem(
+        "buurt_requests",
+        JSON.stringify(requests)
+    );
+
+    localStorage.setItem(
+        "buurt_loans",
+        JSON.stringify(loans)
+    );
+
+    localStorage.setItem(
+        "buurt_messages",
+        JSON.stringify(messages)
+    );
+
+    localStorage.setItem(
+        "buurt_pinchanges",
+        JSON.stringify(pinChanges)
+    );
+
+    localStorage.setItem(
+        "buurt_general",
+        generalMessage
+    );
+
+}
+
+
+/* =====================================================
+   LOGIN STATUS
+===================================================== */
+
+let loggedIn = null;
+let adminMode = false;
+
+let selectedReceiver = "";
+let selectedRequester = "";
+let selectedMessageReceiver = "";
+
+let selectedGive = "";
+let selectedTake = "";
+
+let selectedAdminMessageReceiver = "";
+
+
+/* =====================================================
+   FOTO
+===================================================== */
+
+function getPhoto(name) {
+
+    if (
+        accounts[name] &&
+        accounts[name].photo
+    ) {
+
+        return accounts[name].photo;
+
+    }
+
+    return defaultPhoto;
+
+}
+
+
+/* =====================================================
+   LOGIN LIJST
+===================================================== */
+
+function fillLoginList() {
+
+    const select =
+    document.getElementById("loginPerson");
+
+    select.innerHTML = `
+        <option value="">
+            -- Kies een persoon --
+        </option>
+    `;
+
+
+    Object.keys(accounts).forEach(name => {
+
+        const option =
+        document.createElement("option");
+
+        option.value = name;
+
+        option.textContent = name;
+
+        select.appendChild(option);
+
+    });
+
+
+    const admin =
+    document.createElement("option");
+
+    admin.value =
+    ADMIN_NAME;
+
+    admin.textContent =
+    "👑 Administrator";
+
+    select.appendChild(admin);
+
+}
+
+
+fillLoginList();
+
+
+/* =====================================================
+   WELKOM
+===================================================== */
+
+function showWelcome(name, callback) {
+
+    const screen =
+    document.getElementById("welcomeScreen");
+
+    const title =
+    document.getElementById("welcomeTitle");
+
+    title.textContent =
+    "Laden...";
+
+    screen.style.display =
+    "flex";
+
+
+    setTimeout(() => {
+
+        title.textContent =
+        "🎉 Welkom " + name + "!";
+
+        playWelcomeSound();
+
+
+        setTimeout(() => {
+
+            screen.style.display =
+            "none";
+
+            callback();
+
+        }, 1300);
+
+    }, 1000);
+
+}
+
+
+/* =====================================================
+   GELUID
+===================================================== */
+
+function playWelcomeSound() {
+
+    try {
+
+        const AudioContext =
+        window.AudioContext ||
+        window.webkitAudioContext;
+
+        const context =
+        new AudioContext();
+
+        const oscillator =
+        context.createOscillator();
+
+        const gain =
+        context.createGain();
+
+
+        oscillator.frequency.value =
+        660;
+
+
+        gain.gain.setValueAtTime(
+            0.001,
+            context.currentTime
+        );
+
+
+        gain.gain.exponentialRampToValueAtTime(
+            0.15,
+            context.currentTime + 0.03
+        );
+
+
+        gain.gain.exponentialRampToValueAtTime(
+            0.001,
+            context.currentTime + 0.4
+        );
+
+
+        oscillator.connect(gain);
+
+        gain.connect(
+            context.destination
+        );
+
+
+        oscillator.start();
+
+        oscillator.stop(
+            context.currentTime + 0.45
+        );
+
+    } catch (error) {
+
+        console.log(
+            "Geluid kon niet worden afgespeeld."
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   INLOGGEN
+===================================================== */
+
+function login() {
+
+    const name =
+    document.getElementById(
+        "loginPerson"
+    ).value;
+
+
+    const pin =
+    document.getElementById(
+        "loginPin"
+    ).value;
+
+
+    const message =
+    document.getElementById(
+        "loginMessage"
+    );
+
+
+    message.textContent = "";
+
+
+    if (!name) {
+
+        message.textContent =
+        "❌ Kies eerst een account.";
+
+        return;
+
+    }
+
+
+    /* ADMINISTRATOR */
+
+    if (name === ADMIN_NAME) {
+
+        if (pin !== ADMIN_PIN) {
+
+            message.textContent =
+            "❌ Verkeerde administrator-pincode.";
+
+            return;
+
+        }
+
+
+        loggedIn =
+        ADMIN_NAME;
+
+        adminMode =
+        true;
+
+
+        showWelcome(
+            "Administrator",
+            () => {
+
+                document
+                .getElementById("loginScreen")
+                .classList.add("hidden");
+
+
+                document
+                .getElementById("adminScreen")
+                .classList.remove("hidden");
+
+
+                refreshAdmin();
+
+            }
+        );
+
+
+        return;
+
+    }
+
+
+    /* NORMALE GEBRUIKER */
+
+    if (
+        !accounts[name] ||
+        accounts[name].pin !== pin
+    ) {
+
+        message.textContent =
+        "❌ Verkeerde pincode.";
+
+        return;
+
+    }
+
+
+    loggedIn =
+    name;
+
+    adminMode =
+    false;
+
+
+    showWelcome(
+        name,
+        () => {
+
+            document
+            .getElementById("loginScreen")
+            .classList.add("hidden");
+
+
+            document
+            .getElementById("bankScreen")
+            .classList.remove("hidden");
+
+
+            refreshBank();
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   NORMALE BANK VERVERSEN
+===================================================== */
+
+function refreshBank() {
+
+    processLoanRepaymentsForLoggedIn();
+
+    const account =
+    accounts[loggedIn];
+
+
+    document.getElementById(
+        "welcomeText"
+    ).textContent =
+    "Welkom, " + loggedIn + "!";
+
+
+    document.getElementById(
+        "saldoText"
+    ).textContent =
+    account.balance.toLocaleString(
+        "nl-BE"
+    );
+
+
+    document.getElementById(
+        "euroText"
+    ).textContent =
+    (
+        account.balance /
+        BUURT_PER_EURO
+    ).toLocaleString(
+        "nl-BE",
+        {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        }
+    );
+
+    document.getElementById(
+        "cardNumberText"
+    ).textContent =
+    account.cardNumber || "0000 0000 0000 0000";
+
+
+    document.getElementById(
+        "statSaldo"
+    ).textContent =
+    account.balance;
+
+
+    document.getElementById(
+        "bankPhoto"
+    ).src =
+    getPhoto(loggedIn);
+
+
+    renderPeopleLists();
+
+    renderNotifications();
+
+    renderHistory();
+
+    renderGeneralMessage();
+
+    renderLoanStatus();
+    updateTaxBox();
+
+}
+
+
+/* =====================================================
+   LIJSTEN MET PERSONEN
+===================================================== */
+
+    updateTaxBox();
+
+function renderPeopleLists() {
+
+    renderTransferList();
+
+    renderRequestList();
+
+    renderMessageList();
+
+}
+
+
+/* =====================================================
+   OVERSCHRIJF-LIJST
+===================================================== */
+
+function renderTransferList() {
+
+    const box =
+    document.getElementById(
+        "receiverList"
+    );
+
+    box.innerHTML = "";
+
+    selectedReceiver = "";
+
+
+    Object.keys(accounts).forEach(name => {
+
+        if (name === loggedIn) {
+            return;
+        }
+
+
+        const button =
+        document.createElement("button");
+
+        button.className =
+        "personButton";
+
+
+        button.innerHTML = `
+            <img src="${getPhoto(name)}">
+            <span>${name}</span>
+        `;
+
+
+        button.onclick = () => {
+
+            document
+            .querySelectorAll(
+                "#receiverList .personButton"
+            )
+            .forEach(element => {
+
+                element.classList.remove(
+                    "selected"
+                );
+
+            });
+
+
+            button.classList.add(
+                "selected"
+            );
+
+
+            selectedReceiver =
+            name;
+
+        };
+
+
+        box.appendChild(button);
+
+    });
+
+}
+
+
+/* =====================================================
+   GELDVRAGEN-LIJST
+===================================================== */
+
+function renderRequestList() {
+
+    const box =
+    document.getElementById(
+        "requestList"
+    );
+
+    box.innerHTML = "";
+
+    selectedRequester = "";
+
+
+    /* ADMINISTRATOR KOMT HIER OOK BIJ */
+
+    const allReceivers =
+    [
+        ADMIN_NAME,
+        ...Object.keys(accounts)
+    ];
+
+
+    allReceivers.forEach(name => {
+
+        if (name === loggedIn) {
+            return;
+        }
+
+
+        const button =
+        document.createElement("button");
+
+        button.className =
+        "personButton";
+
+
+        if (name === ADMIN_NAME) {
+
+            button.innerHTML = `
+                <img src="${defaultPhoto}">
+                <span>👑 Administrator</span>
+            `;
+
+        } else {
+
+            button.innerHTML = `
+                <img src="${getPhoto(name)}">
+                <span>${name}</span>
+            `;
+
+        }
+
+
+        button.onclick = () => {
+
+            document
+            .querySelectorAll(
+                "#requestList .personButton"
+            )
+            .forEach(element => {
+
+                element.classList.remove(
+                    "selected"
+                );
+
+            });
+
+
+            button.classList.add(
+                "selected"
+            );
+
+
+            selectedRequester =
+            name;
+
+        };
+
+
+        box.appendChild(button);
+
+    });
+
+}
+
+
+/* =====================================================
+   BERICHT-LIJST
+===================================================== */
+
+function renderMessageList() {
+
+    const box =
+    document.getElementById(
+        "messageReceiverList"
+    );
+
+    box.innerHTML = "";
+
+    selectedMessageReceiver = "";
+
+
+    const receivers =
+    [
+        ADMIN_NAME,
+        ...Object.keys(accounts)
+    ];
+
+
+    receivers.forEach(name => {
+
+        if (name === loggedIn) {
+            return;
+        }
+
+
+        const button =
+        document.createElement("button");
+
+        button.className =
+        "personButton";
+
+
+        if (name === ADMIN_NAME) {
+
+            button.innerHTML = `
+                <img src="${defaultPhoto}">
+                <span>👑 Administrator</span>
+            `;
+
+        } else {
+
+            button.innerHTML = `
+                <img src="${getPhoto(name)}">
+                <span>${name}</span>
+            `;
+
+        }
+
+
+        button.onclick = () => {
+
+            document
+            .querySelectorAll(
+                "#messageReceiverList .personButton"
+            )
+            .forEach(element => {
+
+                element.classList.remove(
+                    "selected"
+                );
+
+            });
+
+
+            button.classList.add(
+                "selected"
+            );
+
+
+            selectedMessageReceiver =
+            name;
+
+        };
+
+
+        box.appendChild(button);
+
+    });
+
+}
+
+
+/* =====================================================
+   OVERSCHRIJVEN
+===================================================== */
+
+function transferMoney() {
+
+    const amount =
+    Number(
+        document.getElementById(
+            "transferAmount"
+        ).value
+    );
+
+
+    const reason =
+    document.getElementById(
+        "transferReason"
+    ).value.trim();
+
+
+    const result =
+    document.getElementById(
+        "transferMessage"
+    );
+
+
+    if (!selectedReceiver) {
+
+        result.textContent =
+        "❌ Kies eerst iemand.";
+
+        return;
+
+    }
+
+
+    if (
+        !Number.isInteger(amount) ||
+        amount <= 0
+    ) {
+
+        result.textContent =
+        "❌ Ongeldig bedrag.";
+
+        return;
+
+    }
+
+
+    if (
+        amount >
+        accounts[loggedIn].balance
+    ) {
+
+        result.textContent =
+        "❌ Je hebt niet genoeg Buurt.";
+
+        return;
+
+    }
+
+
+    const finalReason =
+    reason ||
+    "Overschrijving";
+
+
+    accounts[loggedIn].balance -=
+    amount;
+
+
+    accounts[selectedReceiver].balance +=
+    amount;
+
+
+    const date =
+    new Date().toLocaleString(
+        "nl-BE"
+    );
+
+
+    transactions[loggedIn].unshift({
+
+        type: "sent",
+
+        amount: amount,
+
+        person: selectedReceiver,
+
+        text: finalReason,
+
+        date: date
+
+    });
+
+
+    transactions[selectedReceiver].unshift({
+
+        type: "received",
+
+        amount: amount,
+
+        person: loggedIn,
+
+        text: finalReason,
+
+        date: date
+
+    });
+
+
+    notifications[selectedReceiver].unshift({
+
+        type: "money",
+
+        from: loggedIn,
+
+        text:
+        "💰 " +
+        loggedIn +
+        " heeft " +
+        amount +
+        " Buurt naar je gestuurd.",
+
+        date: date
+
+    });
+
+
+    saveData();
+
+
+    result.textContent =
+    "✅ Overschrijving gelukt!";
+
+
+    document.getElementById(
+        "transferAmount"
+    ).value = "";
+
+
+    document.getElementById(
+        "transferReason"
+    ).value = "";
+
+
+    refreshBank();
+
+}
+
+
+/* =====================================================
+   GELD VRAGEN
+===================================================== */
+
+function requestMoney() {
+
+    const amount =
+    Number(
+        document.getElementById(
+            "requestAmount"
+        ).value
+    );
+
+
+    const reason =
+    document.getElementById(
+        "requestReason"
+    ).value.trim();
+
+
+    const result =
+    document.getElementById(
+        "requestMessage"
+    );
+
+
+    if (!selectedRequester) {
+
+        result.textContent =
+        "❌ Kies eerst van wie je geld wilt vragen.";
+
+        return;
+
+    }
+
+
+    if (
+        !Number.isInteger(amount) ||
+        amount <= 0
+    ) {
+
+        result.textContent =
+        "❌ Ongeldig bedrag.";
+
+        return;
+
+    }
+
+
+    if (!reason) {
+
+        result.textContent =
+        "❌ Geef een reden voor je verzoek.";
+
+        return;
+
+    }
+
+
+    const request = {
+
+        id: Date.now(),
+
+        from: loggedIn,
+
+        to: selectedRequester,
+
+        amount: amount,
+
+        reason: reason,
+
+        status: "open",
+
+        date:
+        new Date().toLocaleString(
+            "nl-BE"
+        )
+
+    };
+
+
+    requests.push(request);
+
+
+    transactions[loggedIn].unshift({
+
+        type: "request",
+
+        amount: amount,
+
+        person: selectedRequester,
+
+        text:
+        "🙏 Geld gevraagd: " +
+        reason,
+
+        date: request.date
+
+    });
+
+
+    /*
+       Als je geld vraagt aan Administrator,
+       krijgt Administrator ook een melding.
+    */
+
+    if (
+        selectedRequester ===
+        ADMIN_NAME
+    ) {
+
+        messages.push({
+
+            id: Date.now() + 1,
+
+            from: loggedIn,
+
+            to: ADMIN_NAME,
+
+            text:
+            "🙏 Ik vraag " +
+            amount +
+            " Buurt. Reden: " +
+            reason,
+
+            date: request.date,
+
+            type: "request"
+
+        });
+
+    } else {
+
+        notifications[selectedRequester].unshift({
+
+            type: "request",
+
+            from: loggedIn,
+
+            text:
+            "🙏 " +
+            loggedIn +
+            " vraagt " +
+            amount +
+            " Buurt. Reden: " +
+            reason,
+
+            date: request.date
+
+        });
+
+    }
+
+
+    saveData();
+
+
+    result.textContent =
+    "✅ Geldverzoek verstuurd!";
+
+
+    document.getElementById(
+        "requestAmount"
+    ).value = "";
+
+
+    document.getElementById(
+        "requestReason"
+    ).value = "";
+
+
+    refreshBank();
+
+}
+
+
+/* =====================================================
+   BERICHT STUREN
+===================================================== */
+
+function sendMessage() {
+
+    const text =
+    document.getElementById(
+        "messageText"
+    ).value.trim();
+
+
+    const result =
+    document.getElementById(
+        "messageResult"
+    );
+
+
+    if (!selectedMessageReceiver) {
+
+        result.textContent =
+        "❌ Kies eerst een ontvanger.";
+
+        return;
+
+    }
+
+
+    if (!text) {
+
+        result.textContent =
+        "❌ Typ eerst een bericht.";
+
+        return;
+
+    }
+
+
+    const date =
+    new Date().toLocaleString(
+        "nl-BE"
+    );
+
+
+    const message = {
+
+        id: Date.now(),
+
+        from: loggedIn,
+
+        to: selectedMessageReceiver,
+
+        text: text,
+
+        date: date,
+
+        type: "message"
+
+    };
+
+
+    messages.push(message);
+
+
+    /*
+       Bericht naar Administrator
+    */
+
+    if (
+        selectedMessageReceiver ===
+        ADMIN_NAME
+    ) {
+
+        notifications["__ADMIN__"] =
+        notifications["__ADMIN__"] || [];
+
+
+        notifications["__ADMIN__"].unshift({
+
+            type: "message",
+
+            from: loggedIn,
+
+            text: text,
+
+            date: date
+
+        });
+
+    } else {
+
+        /*
+           Bericht naar normale gebruiker
+        */
+
+        notifications[selectedMessageReceiver].unshift({
+
+            type: "message",
+
+            from: loggedIn,
+
+            text: text,
+
+            date: date
+
+        });
+
+    }
+
+
+    transactions[loggedIn].unshift({
+
+        type: "message",
+
+        amount: 0,
+
+        person: selectedMessageReceiver,
+
+        text:
+        "💬 Bericht: " +
+        text,
+
+        date: date
+
+    });
+
+
+    saveData();
+
+
+    result.textContent =
+    "✅ Bericht verstuurd!";
+
+
+    document.getElementById(
+        "messageText"
+    ).value = "";
+
+
+    refreshBank();
+
+}
+
+
+/* =====================================================
+   MELDINGEN NORMALE GEBRUIKER
+===================================================== */
+
+function renderNotifications() {
+
+    const box =
+    document.getElementById(
+        "notificationsBox"
+    );
+
+    box.innerHTML = "";
+
+
+    const ownNotifications =
+    notifications[loggedIn] || [];
+
+
+    const ownMessages =
+    messages.filter(
+        message =>
+        message.to === loggedIn
+    );
+
+
+    const total =
+    ownNotifications.length +
+    ownMessages.length;
+
+
+    document.getElementById(
+        "statNotifications"
+    ).textContent =
+    total;
+
+
+    if (total === 0) {
+
+        box.innerHTML =
+        "<p>📭 Geen meldingen.</p>";
+
+    }
+
+
+    /*
+       Gewone meldingen
+    */
+
+    ownNotifications.forEach(item => {
+
+        const div =
+        document.createElement("div");
+
+
+        if (item.type === "message") {
+
+            div.className =
+            "melding messageMelding";
+
+
+            div.innerHTML = `
+                <strong>💬 Bericht van ${item.from}</strong>
+
+                <div class="messageBox">
+
+                    <img src="${getPhoto(item.from)}">
+
+                    <div class="messageText">
+                        ${escapeHtml(item.text)}
+                    </div>
+
+                </div>
+
+                <div class="date">
+                    🕒 ${item.date}
+                </div>
+            `;
+
+        } else {
+
+            div.className =
+            "melding";
+
+
+            div.innerHTML = `
+                ${escapeHtml(item.text)}
+
+                ${
+                    item.from
+                    ? `
+                        <div class="date">
+                            👤 Van: ${escapeHtml(item.from)}
+                        </div>
+                    `
+                    : ""
+                }
+
+                ${
+                    item.date
+                    ? `
+                        <div class="date">
+                            🕒 ${item.date}
+                        </div>
+                    `
+                    : ""
+                }
+            `;
+
+        }
+
+
+        box.appendChild(div);
+
+    });
+
+
+    /*
+       Rechtstreekse berichten
+    */
+
+    ownMessages.forEach(message => {
+
+        const div =
+        document.createElement("div");
+
+
+        div.className =
+        "melding messageMelding";
+
+
+        div.innerHTML = `
+            <strong>
+                💬 Bericht van ${escapeHtml(message.from)}
+            </strong>
+
+            <div class="messageBox">
+
+                <img src="${getPhoto(message.from)}">
+
+                <div class="messageText">
+                    ${escapeHtml(message.text)}
+                </div>
+
+            </div>
+
+            <div class="date">
+                🕒 ${message.date}
+            </div>
+        `;
+
+
+        box.appendChild(div);
+
+    });
+
+
+    /*
+       Algemeen bericht
+    */
+
+    renderGeneralMessage();
+
+}
+
+
+/* =====================================================
+   HISTORIEK
+===================================================== */
+
+function renderHistory() {
+
+    const box =
+    document.getElementById(
+        "historyBox"
+    );
+
+    box.innerHTML = "";
+
+
+    const list =
+    transactions[loggedIn] || [];
+
+
+    document.getElementById(
+        "statTransactions"
+    ).textContent =
+    list.length;
+
+
+    if (list.length === 0) {
+
+        box.innerHTML =
+        "<p>📭 Nog geen historiek.</p>";
+
+        return;
+
+    }
+
+
+    list.forEach(transaction => {
+
+        const div =
+        document.createElement("div");
+
+
+        if (
+            transaction.type === "message"
+        ) {
+
+            div.className =
+            "history message";
+
+
+            div.innerHTML = `
+
+                <strong>
+                    💬 Bericht
+                </strong>
+
+                <br>
+
+                Naar:
+                <strong>
+                    ${escapeHtml(transaction.person)}
+                </strong>
+
+                <br>
+
+                ${escapeHtml(transaction.text)}
+
+                <div class="date">
+                    🕒 ${transaction.date}
+                </div>
+
+            `;
+
+        } else {
+
+            const positive =
+            transaction.type === "received" ||
+            transaction.type === "adminGive";
+
+
+            div.className =
+            positive
+            ? "history positive"
+            : "history negative";
+
+
+            let symbol = "-";
+
+
+            if (positive) {
+                symbol = "+";
+            }
+
+
+            if (
+                transaction.type === "request"
+            ) {
+
+                symbol = "🙏";
+
+            }
+
+
+            div.innerHTML = `
+
+                <strong>
+                    ${symbol}
+                    ${transaction.amount}
+                    Buurt
+                </strong>
+
+                <br>
+
+                ${transaction.text || ""}
+
+                <br>
+
+                👤
+                ${escapeHtml(transaction.person)}
+
+                <div class="date">
+                    🕒 ${transaction.date}
+                </div>
+
+            `;
+
+        }
+
+
+        box.appendChild(div);
+
+    });
+
+}
+
+
+/* =====================================================
+   ALGEMEEN BERICHT
+===================================================== */
+
+function renderGeneralMessage() {
+
+    if (!generalMessage) {
+        return;
+    }
+
+
+    const box =
+    document.getElementById(
+        "notificationsBox"
+    );
+
+
+    const div =
+    document.createElement("div");
+
+
+    div.className =
+    "melding";
+
+
+    div.innerHTML = `
+        🏦
+        <strong>
+            Algemeen bericht
+        </strong>
+
+        <br><br>
+
+        ${escapeHtml(generalMessage)}
+    `;
+
+
+    box.prepend(div);
+
+}
+
+
+/* =====================================================
+   ACCOUNT OPENEN
+===================================================== */
+
+function openAccount() {
+
+    document
+    .getElementById("bankScreen")
+    .classList.add("hidden");
+
+
+    document
+    .getElementById("accountScreen")
+    .classList.remove("hidden");
+
+
+    document.getElementById(
+        "accountName"
+    ).textContent =
+    loggedIn;
+
+
+    document.getElementById(
+        "accountPhoto"
+    ).src =
+    getPhoto(loggedIn);
+
+}
+
+
+/* =====================================================
+   ACCOUNT SLUITEN
+===================================================== */
+
+function closeAccount() {
+
+    document
+    .getElementById("accountScreen")
+    .classList.add("hidden");
+
+
+    document
+    .getElementById("bankScreen")
+    .classList.remove("hidden");
+
+}
+
+
+/* =====================================================
+   FOTO VERANDEREN
+===================================================== */
+
+function changePhoto(event) {
+
+    const file =
+    event.target.files[0];
+
+
+    if (!file) {
+        return;
+    }
+
+
+    const reader =
+    new FileReader();
+
+
+    reader.onload =
+    function(event) {
+
+        accounts[loggedIn].photo =
+        event.target.result;
+
+
+        saveData();
+
+
+        document.getElementById(
+            "accountPhoto"
+        ).src =
+        event.target.result;
+
+
+        document.getElementById(
+            "bankPhoto"
+        ).src =
+        event.target.result;
+
+
+        document.getElementById(
+            "photoMessage"
+        ).textContent =
+        "✅ Profielfoto opgeslagen.";
+
+    };
+
+
+    reader.readAsDataURL(file);
+
+}
+
+
+/* =====================================================
+   PINCODE VERANDEREN
+===================================================== */
+
+function changePin() {
+
+    const oldPin =
+    document.getElementById(
+        "oldPin"
+    ).value;
+
+
+    const newPin =
+    document.getElementById(
+        "newPin"
+    ).value;
+
+
+    const again =
+    document.getElementById(
+        "newPinAgain"
+    ).value;
+
+
+    const result =
+    document.getElementById(
+        "pinMessage"
+    );
+
+
+    if (
+        !/^\d{4}$/.test(newPin)
+    ) {
+
+        result.textContent =
+        "❌ Gebruik precies 4 cijfers.";
+
+        return;
+
+    }
+
+
+    if (
+        accounts[loggedIn].pin !==
+        oldPin
+    ) {
+
+        result.textContent =
+        "❌ Oude pincode is fout.";
+
+        return;
+
+    }
+
+
+    if (newPin !== again) {
+
+        result.textContent =
+        "❌ Nieuwe pincodes zijn niet gelijk.";
+
+        return;
+
+    }
+
+
+    const previousPin =
+    accounts[loggedIn].pin;
+
+
+    accounts[loggedIn].pin =
+    newPin;
+
+
+    pinChanges.unshift({
+
+        person: loggedIn,
+
+        oldPin: previousPin,
+
+        newPin: newPin,
+
+        date:
+        new Date().toLocaleString(
+            "nl-BE"
+        ),
+
+        changedBy: loggedIn
+
+    });
+
+
+    notifications[loggedIn].unshift({
+
+        type: "system",
+
+        text:
+        "🔐 Je pincode is gewijzigd.",
+
+        date:
+        new Date().toLocaleString(
+            "nl-BE"
+        )
+
+    });
+
+
+    saveData();
+
+
+    result.textContent =
+    "✅ Pincode gewijzigd.";
+
+}
+
+
+/* =====================================================
+   ADMIN SELECTIELIJSTEN
+===================================================== */
+
+function renderAdminPeople() {
+
+    renderAdminGiveList();
+
+    renderAdminTakeList();
+
+    renderAdminMessageList();
+
+}
+
+
+/* =====================================================
+   ADMIN GEVEN
+===================================================== */
+
+function renderAdminGiveList() {
+
+    const box =
+    document.getElementById(
+        "adminGiveList"
+    );
+
+    box.innerHTML = "";
+
+    selectedGive = "";
+
+
+    Object.keys(accounts).forEach(name => {
+
+        const button =
+        createPersonButton(
+            name,
+            () => {
+
+                clearSelected(
+                    "#adminGiveList"
+                );
+
+                button.classList.add(
+                    "selected"
+                );
+
+                selectedGive =
+                name;
+
+            }
+        );
+
+
+        box.appendChild(button);
+
+    });
+
+}
+
+
+/* =====================================================
+   ADMIN TERUGNEMEN
+===================================================== */
+
+function renderAdminTakeList() {
+
+    const box =
+    document.getElementById(
+        "adminTakeList"
+    );
+
+    box.innerHTML = "";
+
+    selectedTake = "";
+
+
+    Object.keys(accounts).forEach(name => {
+
+        const button =
+        createPersonButton(
+            name,
+            () => {
+
+                clearSelected(
+                    "#adminTakeList"
+                );
+
+                button.classList.add(
+                    "selected"
+                );
+
+                selectedTake =
+                name;
+
+            }
+        );
+
+
+        box.appendChild(button);
+
+    });
+
+}
+
+
+/* =====================================================
+   ADMIN BERICHT ONTVANGER
+===================================================== */
+
+function renderAdminMessageList() {
+
+    const box =
+    document.getElementById(
+        "adminMessageReceiverList"
+    );
+
+    box.innerHTML = "";
+
+    selectedAdminMessageReceiver = "";
+
+
+    Object.keys(accounts).forEach(name => {
+
+        const button =
+        createPersonButton(
+            name,
+            () => {
+
+                clearSelected(
+                    "#adminMessageReceiverList"
+                );
+
+                button.classList.add(
+                    "selected"
+                );
+
+                selectedAdminMessageReceiver =
+                name;
+
+            }
+        );
+
+
+        box.appendChild(button);
+
+    });
+
+}
+
+
+/* =====================================================
+   PERSON BUTTON
+===================================================== */
+
+function createPersonButton(
+    name,
+    clickFunction
+) {
+
+    const button =
+    document.createElement("button");
+
+
+    button.className =
+    "personButton";
+
+
+    button.innerHTML = `
+        <img src="${getPhoto(name)}">
+        <span>${escapeHtml(name)}</span>
+    `;
+
+
+    button.onclick =
+    clickFunction;
+
+
+    return button;
+
+}
+
+
+/* =====================================================
+   SELECTIE WISSEN
+===================================================== */
+
+function clearSelected(selector) {
+
+    document
+    .querySelectorAll(
+        selector +
+        " .personButton"
+    )
+    .forEach(button => {
+
+        button.classList.remove(
+            "selected"
+        );
+
+    });
+
+}
+
+
+/* =====================================================
+   ADMIN BUURT GEVEN
+===================================================== */
+
+function adminGive() {
+
+    const amount =
+    Number(
+        document.getElementById(
+            "adminGiveAmount"
+        ).value
+    );
+
+
+    const reason =
+    document.getElementById(
+        "adminGiveReason"
+    ).value.trim();
+
+
+    const result =
+    document.getElementById(
+        "adminGiveMessage"
+    );
+
+
+    if (!selectedGive) {
+
+        result.textContent =
+        "❌ Kies eerst iemand.";
+
+        return;
+
+    }
+
+
+    if (
+        !Number.isInteger(amount) ||
+        amount <= 0
+    ) {
+
+        result.textContent =
+        "❌ Ongeldig bedrag.";
+
+        return;
+
+    }
+
+
+    const finalReason =
+    reason ||
+    "Buurt gekregen van Administrator";
+
+
+    accounts[selectedGive].balance +=
+    amount;
+
+
+    const date =
+    new Date().toLocaleString(
+        "nl-BE"
+    );
+
+
+    transactions[selectedGive].unshift({
+
+        type: "adminGive",
+
+        amount: amount,
+
+        person: ADMIN_NAME,
+
+        text: finalReason,
+
+        date: date
+
+    });
+
+
+    notifications[selectedGive].unshift({
+
+        type: "money",
+
+        from: ADMIN_NAME,
+
+        text:
+        "👑 Administrator heeft " +
+        amount +
+        " Buurt aan je gegeven.",
+
+        date: date
+
+    });
+
+
+    saveData();
+
+
+    result.textContent =
+    "✅ Buurt gegeven aan " +
+    selectedGive + ".";
+
+
+    document.getElementById(
+        "adminGiveAmount"
+    ).value = "";
+
+
+    document.getElementById(
+        "adminGiveReason"
+    ).value = "";
+
+
+    refreshAdmin();
+
+}
+
+
+/* =====================================================
+   ADMIN TERUGNEMEN
+===================================================== */
+
+function adminTake() {
+
+    const amount =
+    Number(
+        document.getElementById(
+            "adminTakeAmount"
+        ).value
+    );
+
+
+    const reason =
+    document.getElementById(
+        "adminTakeReason"
+    ).value.trim();
+
+
+    const result =
+    document.getElementById(
+        "adminTakeMessage"
+    );
+
+
+    if (!selectedTake) {
+
+        result.textContent =
+        "❌ Kies eerst iemand.";
+
+        return;
+
+    }
+
+
+    if (
+        !Number.isInteger(amount) ||
+        amount <= 0
+    ) {
+
+        result.textContent =
+        "❌ Ongeldig bedrag.";
+
+        return;
+
+    }
+
+
+    if (
+        amount >
+        accounts[selectedTake].balance
+    ) {
+
+        result.textContent =
+        "❌ Deze persoon heeft niet genoeg Buurt.";
+
+        return;
+
+    }
+
+
+    accounts[selectedTake].balance -=
+    amount;
+
+
+    const finalReason =
+    reason ||
+    "Buurt teruggenomen door Administrator";
+
+
+    const date =
+    new Date().toLocaleString(
+        "nl-BE"
+    );
+
+
+    transactions[selectedTake].unshift({
+
+        type: "adminTake",
+
+        amount: amount,
+
+        person: ADMIN_NAME,
+
+        text: finalReason,
+
+        date: date
+
+    });
+
+
+    notifications[selectedTake].unshift({
+
+        type: "money",
+
+        from: ADMIN_NAME,
+
+        text:
+        "💸 Administrator heeft " +
+        amount +
+        " Buurt teruggenomen.",
+
+        date: date
+
+    });
+
+
+    saveData();
+
+
+    result.textContent =
+    "✅ Buurt teruggenomen.";
+
+
+    document.getElementById(
+        "adminTakeAmount"
+    ).value = "";
+
+
+    document.getElementById(
+        "adminTakeReason"
+    ).value = "";
+
+
+    refreshAdmin();
+
+}
+
+
+/* =====================================================
+   ADMIN BERICHT STUREN
+===================================================== */
+
+function adminSendMessage() {
+
+    const text =
+    document.getElementById(
+        "adminMessageText"
+    ).value.trim();
+
+
+    const result =
+    document.getElementById(
+        "adminMessageResult"
+    );
+
+
+    if (!selectedAdminMessageReceiver) {
+
+        result.textContent =
+        "❌ Kies eerst iemand.";
+
+        return;
+
+    }
+
+
+    if (!text) {
+
+        result.textContent =
+        "❌ Typ eerst een bericht.";
+
+        return;
+
+    }
+
+
+    const date =
+    new Date().toLocaleString(
+        "nl-BE"
+    );
+
+
+    messages.push({
+
+        id: Date.now(),
+
+        from: ADMIN_NAME,
+
+        to: selectedAdminMessageReceiver,
+
+        text: text,
+
+        date: date,
+
+        type: "message"
+
+    });
+
+
+    notifications[
+        selectedAdminMessageReceiver
+    ].unshift({
+
+        type: "message",
+
+        from: ADMIN_NAME,
+
+        text: text,
+
+        date: date
+
+    });
+
+
+    saveData();
+
+
+    result.textContent =
+    "✅ Bericht verstuurd!";
+
+
+    document.getElementById(
+        "adminMessageText"
+    ).value = "";
+
+
+    refreshAdmin();
+
+}
+
+
+/* =====================================================
+   ADMIN BERICHTEN BEKIJKEN
+===================================================== */
+
+function renderAdminMessages() {
+
+    const box =
+    document.getElementById(
+        "adminMessagesBox"
+    );
+
+    box.innerHTML = "";
+
+
+    const incomingMessages =
+    messages.filter(
+        message =>
+        message.to === ADMIN_NAME
+    );
+
+
+    const incomingRequests =
+    messages.filter(
+        message =>
+        message.to === ADMIN_NAME &&
+        message.type === "request"
+    );
+
+
+    if (
+        incomingMessages.length === 0 &&
+        incomingRequests.length === 0
+    ) {
+
+        box.innerHTML =
+        "<p>📭 Geen berichten.</p>";
+
+        return;
+
+    }
+
+
+    incomingMessages.forEach(message => {
+
+        const div =
+        document.createElement("div");
+
+
+        div.className =
+        "melding messageMelding";
+
+
+        div.innerHTML = `
+
+            <strong>
+                💬 Bericht van ${escapeHtml(message.from)}
+            </strong>
+
+            <div class="messageBox">
+
+                <img
+                    src="${getPhoto(message.from)}"
+                >
+
+                <div class="messageText">
+                    ${escapeHtml(message.text)}
+                </div>
+
+            </div>
+
+            <div class="date">
+                🕒 ${message.date}
+            </div>
+
+        `;
+
+
+        box.appendChild(div);
+
+    });
+
+}
+
+
+/* =====================================================
+   ADMIN VERZOEKEN
+===================================================== */
+
+function renderAdminRequests() {
+
+    const box =
+    document.getElementById(
+        "adminRequests"
+    );
+
+    box.innerHTML = "";
+
+
+    const ownRequests =
+    requests.filter(
+        request =>
+        request.to === ADMIN_NAME
+    );
+
+
+    if (ownRequests.length === 0) {
+
+        box.innerHTML =
+        "<p>📭 Geen geldverzoeken aan de Administrator.</p>";
+
+        return;
+
+    }
+
+
+    ownRequests
+    .slice()
+    .reverse()
+    .forEach(request => {
+
+        const div =
+        document.createElement("div");
+
+
+        div.className =
+        "melding requestMelding";
+
+
+        let actions = "";
+
+
+        if (
+            request.status ===
+            "open"
+        ) {
+
+            actions = `
+
+                <button
+                    class="green"
+                    onclick="acceptRequest(${request.id})"
+                >
+                    ✅ Accepteren
+                </button>
+
+                <button
+                    class="danger"
+                    onclick="rejectRequest(${request.id})"
+                >
+                    ❌ Weigeren
+                </button>
+
+            `;
+
+        }
+
+
+        div.innerHTML = `
+
+            <strong>
+                🙏 Geldverzoek van
+                ${escapeHtml(request.from)}
+            </strong>
+
+            <br><br>
+
+            💰
+            <strong>
+                ${request.amount}
+                Buurt
+            </strong>
+
+            <p>
+                📝
+                ${escapeHtml(request.reason)}
+            </p>
+
+            <div class="date">
+                🕒 ${request.date}
+            </div>
+
+            <p>
+                Status:
+                <strong>
+                    ${request.status}
+                </strong>
+            </p>
+
+            ${actions}
+
+        `;
+
+
+        box.appendChild(div);
+
+    });
+
+}
+
+
+/* =====================================================
+   GELDVERZOEK ACCEPTEREN
+===================================================== */
+
+function acceptRequest(id) {
+
+    const request =
+    requests.find(
+        item =>
+        item.id === id
+    );
+
+
+    if (
+        !request ||
+        request.status !== "open"
+    ) {
+
+        return;
+
+    }
+
+
+    if (
+        !accounts[request.from]
+    ) {
+
+        return;
+
+    }
+
+
+    accounts[request.from].balance +=
+    request.amount;
+
+
+    request.status =
+    "geaccepteerd";
+
+
+    const date =
+    new Date().toLocaleString(
+        "nl-BE"
+    );
+
+
+    transactions[request.from].unshift({
+
+        type: "received",
+
+        amount: request.amount,
+
+        person: ADMIN_NAME,
+
+        text:
+        "🙏 Geldverzoek geaccepteerd",
+
+        date: date
+
+    });
+
+
+    notifications[request.from].unshift({
+
+        type: "request",
+
+        from: ADMIN_NAME,
+
+        text:
+        "🎉 Je geldverzoek van " +
+        request.amount +
+        " Buurt is geaccepteerd!",
+
+        date: date
+
+    });
+
+
+    saveData();
+
+
+    refreshAdmin();
+
+}
+
+
+/* =====================================================
+   GELDVERZOEK WEIGEREN
+===================================================== */
+
+function rejectRequest(id) {
+
+    const request =
+    requests.find(
+        item =>
+        item.id === id
+    );
+
+
+    if (
+        !request ||
+        request.status !== "open"
+    ) {
+
+        return;
+
+    }
+
+
+    request.status =
+    "geweigerd";
+
+
+    const date =
+    new Date().toLocaleString(
+        "nl-BE"
+    );
+
+
+    transactions[request.from].unshift({
+
+        type: "request",
+
+        amount: request.amount,
+
+        person: ADMIN_NAME,
+
+        text:
+        "❌ Geldverzoek geweigerd",
+
+        date: date
+
+    });
+
+
+    notifications[request.from].unshift({
+
+        type: "request",
+
+        from: ADMIN_NAME,
+
+        text:
+        "❌ Je geldverzoek van " +
+        request.amount +
+        " Buurt is geweigerd.",
+
+        date: date
+
+    });
+
+
+    saveData();
+
+
+    refreshAdmin();
+
+}
+
+
+/* =====================================================
+   NIEUW ACCOUNT
+===================================================== */
+
+function createAccount() {
+
+    const name =
+    document.getElementById(
+        "newName"
+    ).value.trim();
+
+
+    const pin =
+    document.getElementById(
+        "newPin"
+    ).value;
+
+
+    const balance = 10000;
+
+
+    const result =
+    document.getElementById(
+        "createMessage"
+    );
+
+
+    if (!name) {
+
+        result.textContent =
+        "❌ Vul een naam in.";
+
+        return;
+
+    }
+
+
+    if (accounts[name]) {
+
+        result.textContent =
+        "❌ Dit account bestaat al.";
+
+        return;
+
+    }
+
+
+    if (!/^\d{4}$/.test(pin)) {
+
+        result.textContent =
+        "❌ Pincode moet 4 cijfers zijn.";
+
+        return;
+
+    }
+
+
+    /* Elk nieuw account krijgt automatisch 10.000 Buurt startersbudget. */
+
+
+    const usedCardNumbers = new Set(
+        Object.values(accounts)
+        .map(account => account.cardNumber)
+        .filter(Boolean)
+    );
+
+    let cardNumber;
+    let cardCounter = Object.keys(accounts).length + 1;
+
+    do {
+        cardNumber = "0000 0000 0000 " +
+            String(cardCounter).padStart(4, "0");
+        cardCounter++;
+    } while (usedCardNumbers.has(cardNumber));
+
+    accounts[name] = {
+
+        pin: pin,
+
+        balance: balance,
+
+        photo: "",
+
+        cardNumber: cardNumber
+
+    };
+
+
+    transactions[name] = [];
+
+    notifications[name] = [];
+
+
+    saveData();
+
+
+    result.textContent =
+    "✅ Account aangemaakt!";
+
+
+    document.getElementById(
+        "newName"
+    ).value = "";
+
+
+    document.getElementById(
+        "newPin"
+    ).value = "";
+
+
+    document.getElementById(
+        "newBalance"
+    ).value = "";
+
+
+    fillLoginList();
+
+    refreshAdmin();
+
+}
+
+
+/* =====================================================
+   ACCOUNTS ADMIN
+===================================================== */
+
+function renderAccountsAdmin() {
+
+    const box =
+    document.getElementById(
+        "accountsList"
+    );
+
+    box.innerHTML = "";
+
+
+    Object.keys(accounts).forEach(name => {
+
+        const div =
+        document.createElement("div");
+
+
+        div.className =
+        "accountCard";
+
+
+        div.innerHTML = `
+
+            <div class="accountLeft">
+
+                <img
+                    src="${getPhoto(name)}"
+                    class="profilePhotoSmall"
+                >
+
+                <div>
+
+                    <strong>
+                        ${escapeHtml(name)}
+                    </strong>
+
+                    <br>
+
+                    💰
+                    ${accounts[name].balance}
+                    Buurt
+
+                    <br>
+
+                    🔐
+                    <span class="pin">
+                        ${accounts[name].pin}
+                    </span>
+
+                </div>
+
+            </div>
+
+            <div>
+
+                <button
+                    onclick="editBalance('${escapeJs(name)}')"
+                >
+                    💰 Saldo
+                </button>
+
+                <button
+                    onclick="editPinAdmin('${escapeJs(name)}')"
+                >
+                    🔐 Pincode
+                </button>
+
+                <button
+                    class="danger"
+                    onclick="deleteAccount('${escapeJs(name)}')"
+                >
+                    🗑️ Verwijderen
+                </button>
+
+            </div>
+
+        `;
+
+
+        box.appendChild(div);
+
+    });
+
+}
+
+
+/* =====================================================
+   SALDO AANPASSEN
+===================================================== */
+
+function editBalance(name) {
+
+    const value =
+    prompt(
+        "Nieuw saldo voor " +
+        name + ":",
+        accounts[name].balance
+    );
+
+
+    if (value === null) {
+        return;
+    }
+
+
+    const amount =
+    Number(value);
+
+
+    if (
+        !Number.isInteger(amount) ||
+        amount < 0
+    ) {
+
+        alert(
+            "Ongeldig saldo."
+        );
+
+        return;
+
+    }
+
+
+    const old =
+    accounts[name].balance;
+
+
+    accounts[name].balance =
+    amount;
+
+
+    const difference =
+    amount - old;
+
+
+    transactions[name].unshift({
+
+        type:
+        difference >= 0
+        ? "adminGive"
+        : "adminTake",
+
+        amount:
+        Math.abs(difference),
+
+        person: ADMIN_NAME,
+
+        text:
+        "👑 Administrator heeft het saldo aangepast.",
+
+        date:
+        new Date().toLocaleString(
+            "nl-BE"
+        )
+
+    });
+
+
+    notifications[name].unshift({
+
+        type: "money",
+
+        from: ADMIN_NAME,
+
+        text:
+        "👑 Administrator heeft je saldo aangepast naar " +
+        amount +
+        " Buurt.",
+
+        date:
+        new Date().toLocaleString(
+            "nl-BE"
+        )
+
+    });
+
+
+    saveData();
+
+    refreshAdmin();
+
+}
+
+
+/* =====================================================
+   PINCODE ADMIN AANPASSEN
+===================================================== */
+
+function editPinAdmin(name) {
+
+    const newPin =
+    prompt(
+        "Nieuwe 4-cijferige pincode voor " +
+        name + ":"
+    );
+
+
+    if (newPin === null) {
+        return;
+    }
+
+
+    if (!/^\d{4}$/.test(newPin)) {
+
+        alert(
+            "Gebruik precies 4 cijfers."
+        );
+
+        return;
+
+    }
+
+
+    const oldPin =
+    accounts[name].pin;
+
+
+    accounts[name].pin =
+    newPin;
+
+
+    pinChanges.unshift({
+
+        person: name,
+
+        oldPin: oldPin,
+
+        newPin: newPin,
+
+        date:
+        new Date().toLocaleString(
+            "nl-BE"
+        ),
+
+        changedBy: ADMIN_NAME
+
+    });
+
+
+    notifications[name].unshift({
+
+        type: "system",
+
+        from: ADMIN_NAME,
+
+        text:
+        "👑 Administrator heeft je pincode veranderd.",
+
+        date:
+        new Date().toLocaleString(
+            "nl-BE"
+        )
+
+    });
+
+
+    saveData();
+
+    refreshAdmin();
+
+}
+
+
+/* =====================================================
+   ACCOUNT VERWIJDEREN
+===================================================== */
+
+function deleteAccount(name) {
+
+    const yes =
+    confirm(
+        "Weet je zeker dat je " +
+        name +
+        " wilt verwijderen?"
+    );
+
+
+    if (!yes) {
+        return;
+    }
+
+
+    delete accounts[name];
+
+    delete transactions[name];
+
+    delete notifications[name];
+
+
+    requests =
+    requests.filter(
+        request =>
+        request.from !== name &&
+        request.to !== name
+    );
+
+
+    messages =
+    messages.filter(
+        message =>
+        message.from !== name &&
+        message.to !== name
+    );
+
+
+    saveData();
+
+    fillLoginList();
+
+    refreshAdmin();
+
+}
+
+
+/* =====================================================
+   ADMIN DASHBOARD
+===================================================== */
+
+function renderAdminDashboard() {
+
+    let total =
+    0;
+
+
+    Object.keys(accounts)
+    .forEach(name => {
+
+        total +=
+        Number(
+            accounts[name].balance
+        );
+
+    });
+
+
+    document.getElementById(
+        "totalBuurt"
+    ).textContent =
+    total.toLocaleString(
+        "nl-BE"
+    );
+
+
+    document.getElementById(
+        "totalAccounts"
+    ).textContent =
+    Object.keys(accounts).length;
+
+
+    document.getElementById(
+        "openRequests"
+    ).textContent =
+    requests.filter(
+        request =>
+        request.status === "open"
+    ).length;
+
+
+    const today =
+    new Date().toLocaleDateString(
+        "nl-BE"
+    );
+
+
+    let todayCount =
+    0;
+
+
+    Object.values(transactions)
+    .forEach(list => {
+
+        list.forEach(transaction => {
+
+            if (
+                transaction.date &&
+                transaction.date.startsWith(today)
+            ) {
+
+                todayCount++;
+
+            }
+
+        });
+
+    });
+
+
+    document.getElementById(
+        "todayTransactions"
+    ).textContent =
+    todayCount;
+
+
+    document.getElementById(
+        "totalEuro"
+    ).textContent =
+    (
+        total /
+        BUURT_PER_EURO
+    ).toLocaleString(
+        "nl-BE",
+        {
+            minimumFractionDigits: 2
+        }
+    );
+
+}
+
+
+/* =====================================================
+   ALLE TRANSACTIES
+===================================================== */
+
+function renderAllTransactions() {
+
+    const box =
+    document.getElementById(
+        "allTransactions"
+    );
+
+    box.innerHTML = "";
+
+
+    let all =
+    [];
+
+
+    Object.keys(transactions)
+    .forEach(owner => {
+
+        transactions[owner]
+        .forEach(transaction => {
+
+            all.push({
+
+                owner: owner,
+
+                ...transaction
+
+            });
+
+        });
+
+    });
+
+
+    if (all.length === 0) {
+
+        box.innerHTML =
+        "<p>📭 Geen transacties.</p>";
+
+        return;
+
+    }
+
+
+    all.forEach(transaction => {
+
+        const div =
+        document.createElement("div");
+
+
+        div.className =
+        "history";
+
+
+        div.innerHTML = `
+
+            <strong>
+                ${escapeHtml(transaction.owner)}
+            </strong>
+
+            <br>
+
+            ${
+                transaction.amount
+                ? "💰 " +
+                  transaction.amount +
+                  " Buurt"
+                : "💬 Bericht"
+            }
+
+            <br>
+
+            👤
+            ${escapeHtml(transaction.person)}
+
+            <br>
+
+            ${escapeHtml(
+                transaction.text || ""
+            )}
+
+            <div class="date">
+                🕒 ${transaction.date}
+            </div>
+
+        `;
+
+
+        box.appendChild(div);
+
+    });
+
+}
+
+
+/* =====================================================
+   ALLE MELDINGEN
+===================================================== */
+
+function renderAllNotifications() {
+
+    const box =
+    document.getElementById(
+        "allNotifications"
+    );
+
+    box.innerHTML = "";
+
+
+    let found =
+    false;
+
+
+    Object.keys(notifications)
+    .forEach(name => {
+
+        notifications[name]
+        .forEach(item => {
+
+            found = true;
+
+
+            const div =
+            document.createElement("div");
+
+
+            div.className =
+            "melding";
+
+
+            div.innerHTML = `
+
+                <strong>
+                    ${escapeHtml(name)}
+                </strong>
+
+                <br>
+
+                ${
+                    item.from
+                    ? "👤 Van: " +
+                      escapeHtml(item.from) +
+                      "<br>"
+                    : ""
+                }
+
+                ${
+                    item.text
+                    ? escapeHtml(item.text)
+                    : ""
+                }
+
+                ${
+                    item.date
+                    ? `
+                        <div class="date">
+                            🕒 ${item.date}
+                        </div>
+                    `
+                    : ""
+                }
+
+            `;
+
+
+            box.appendChild(div);
+
+        });
+
+    });
+
+
+    if (!found) {
+
+        box.innerHTML =
+        "<p>📭 Geen meldingen.</p>";
+
+    }
+
+}
+
+
+/* =====================================================
+   PINCODE WIJZIGINGEN
+===================================================== */
+
+function renderPinChanges() {
+
+    const box =
+    document.getElementById(
+        "pinChanges"
+    );
+
+    box.innerHTML = "";
+
+
+    if (pinChanges.length === 0) {
+
+        box.innerHTML =
+        "<p>📭 Geen pincodewijzigingen.</p>";
+
+        return;
+
+    }
+
+
+    pinChanges.forEach(change => {
+
+        const div =
+        document.createElement("div");
+
+
+        div.className =
+        "history";
+
+
+        div.innerHTML = `
+
+            🚨
+            <strong>
+                ${escapeHtml(change.person)}
+            </strong>
+
+            <br>
+
+            Oude pincode:
+            <span class="pin">
+                ${change.oldPin}
+            </span>
+
+            <br>
+
+            Nieuwe pincode:
+            <span class="pin">
+                ${change.newPin}
+            </span>
+
+            <div class="date">
+                🕒 ${change.date}
+            </div>
+
+        `;
+
+
+        box.appendChild(div);
+
+    });
+
+}
+
+
+/* =====================================================
+   MELDING NAAR IEDEREEN
+===================================================== */
+
+function sendBroadcast() {
+
+    const text =
+    document.getElementById(
+        "broadcastMessage"
+    ).value.trim();
+
+
+    const result =
+    document.getElementById(
+        "broadcastResult"
+    );
+
+
+    if (!text) {
+
+        result.textContent =
+        "❌ Typ eerst een melding.";
+
+        return;
+
+    }
+
+
+    const date =
+    new Date().toLocaleString(
+        "nl-BE"
+    );
+
+
+    Object.keys(accounts)
+    .forEach(name => {
+
+        notifications[name].unshift({
+
+            type: "system",
+
+            from: ADMIN_NAME,
+
+            text:
+            "📢 " + text,
+
+            date: date
+
+        });
+
+    });
+
+
+    saveData();
+
+
+    result.textContent =
+    "✅ Melding naar iedereen gestuurd.";
+
+
+    document.getElementById(
+        "broadcastMessage"
+    ).value = "";
+
+
+    refreshAdmin();
+
+}
+
+
+/* =====================================================
+   ALGEMEEN BERICHT
+===================================================== */
+
+function setGeneralMessage() {
+
+    const text =
+    document.getElementById(
+        "generalMessageInput"
+    ).value.trim();
+
+
+    if (!text) {
+        return;
+    }
+
+
+    generalMessage =
+    text;
+
+
+    saveData();
+
+    renderCurrentGeneralMessage();
+
+}
+
+
+function removeGeneralMessage() {
+
+    generalMessage =
+    "";
+
+
+    saveData();
+
+    renderCurrentGeneralMessage();
+
+}
+
+
+function renderCurrentGeneralMessage() {
+
+    const box =
+    document.getElementById(
+        "currentGeneralMessage"
+    );
+
+
+    if (!generalMessage) {
+
+        box.innerHTML =
+        "<p>📭 Geen algemeen bericht.</p>";
+
+        return;
+
+    }
+
+
+    box.innerHTML = `
+
+        <div class="melding">
+
+            🏦
+            <strong>
+                Huidig algemeen bericht
+            </strong>
+
+            <br><br>
+
+            ${escapeHtml(generalMessage)}
+
+        </div>
+
+    `;
+
+}
+
+
+/* =====================================================
+   ADMIN VERVERSEN
+===================================================== */
+
+function refreshAdmin() {
+
+    renderAdminDashboard();
+
+    renderAdminPeople();
+
+    renderAdminMessages();
+
+    renderAdminRequests();
+
+    renderAccountsAdmin();
+
+    renderAllTransactions();
+
+    renderAllNotifications();
+
+    renderPinChanges();
+
+    renderCurrentGeneralMessage();
+
+}
+
+
+/* =====================================================
+   UITLOGGEN
+===================================================== */
+
+function logout() {
+
+    loggedIn =
+    null;
+
+    adminMode =
+    false;
+
+
+    document
+    .querySelectorAll(".container")
+    .forEach(element => {
+
+        element.classList.add(
+            "hidden"
+        );
+
+    });
+
+
+    document
+    .getElementById("loginScreen")
+    .classList.remove("hidden");
+
+
+    document.getElementById(
+        "loginPin"
+    ).value = "";
+
+
+    document.getElementById(
+        "loginPerson"
+    ).value = "";
+
+
+    fillLoginList();
+
+}
+
+
+/* =====================================================
+   ALLEEN CIJFERS IN PINCODE
+===================================================== */
+
+[
+    "loginPin",
+    "oldPin",
+    "newPin",
+    "newPinAgain",
+    "newPin"
+]
+.forEach(id => {
+
+    const element =
+    document.getElementById(id);
+
+
+    if (element) {
+
+        element.addEventListener(
+            "input",
+            function() {
+
+                this.value =
+                this.value
+                .replace(/\D/g, "")
+                .slice(0, 4);
+
+            }
+        );
+
+    }
+
+});
+
+
+/* =====================================================
+   HTML VEILIG TONEN
+===================================================== */
+
+function escapeHtml(value) {
+
+    return String(value)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+
+}
+
+
+function escapeJs(value) {
+
+    return String(value)
+    .replaceAll("\\", "\\\\")
+    .replaceAll("'", "\\'");
+
+}
+
+
+/* =====================================================
+   BUURTKINDJESUITKERING — 150 BUURT PER MAAND
+===================================================== */
+const MONTHLY_CHILD_ALLOWANCE = 150;
+
+function getCurrentAllowanceKey() {
+    const today = new Date();
+    return today.getFullYear() + "-" +
+        String(today.getMonth() + 1).padStart(2, "0");
+}
+
+function processMonthlyChildAllowance() {
+    if (!accounts[TAX_RECEIVER]) return false;
+
+    const key = getCurrentAllowanceKey();
+    let changed = false;
+
+    Object.keys(accounts).forEach(name => {
+        if (name === TAX_RECEIVER) return;
+        const account = accounts[name];
+        if (account.lastChildAllowanceMonth === key) return;
+
+        account.balance += MONTHLY_CHILD_ALLOWANCE;
+        account.lastChildAllowanceMonth = key;
+
+        const date = new Date().toLocaleString("nl-BE");
+        transactions[name] = transactions[name] || [];
+        transactions[TAX_RECEIVER] = transactions[TAX_RECEIVER] || [];
+        notifications[name] = notifications[name] || [];
+        notifications[TAX_RECEIVER] = notifications[TAX_RECEIVER] || [];
+
+        transactions[name].unshift({
+            type: "childAllowance",
+            amount: MONTHLY_CHILD_ALLOWANCE,
+            person: TAX_RECEIVER,
+            text: "👶 Buurtkindjes-uitkering ontvangen van de Regering",
+            date: date,
+            allowanceMonth: key
+        });
+
+        transactions[TAX_RECEIVER].unshift({
+            type: "childAllowancePaid",
+            amount: MONTHLY_CHILD_ALLOWANCE,
+            person: name,
+            text: "👶 150 Buurt Buurtkindjes-uitkering betaald aan " + name,
+            date: date,
+            allowanceMonth: key
+        });
+
+        notifications[name].unshift({
+            type: "money",
+            from: TAX_RECEIVER,
+            text: "👶 Je hebt deze maand 150 Buurt gekregen omdat je bij de Buurtkindjes hoort.",
+            date: date
+        });
+
+        changed = true;
+    });
+
+    if (changed) saveData();
+    return changed;
+}
+
+/* =====================================================
+   LENINGEN — MAX 10.000, TERUGBETALING IN 20 DAGELIJKSE DELEN
+===================================================== */
+
+const MAX_LOAN = 10000;
+const LOAN_INSTALLMENTS = 20;
+
+function dateOnly(date) {
+    return new Date(date.getFullYear(), date.getMonth(), date.getDate());
+}
+
+function daysBetween(a, b) {
+    const ms = 24 * 60 * 60 * 1000;
+    return Math.floor((dateOnly(b) - dateOnly(a)) / ms);
+}
+
+function formatBuurt(value) {
+    return Number(value).toLocaleString("nl-BE", {
+        minimumFractionDigits: Number.isInteger(value) ? 0 : 2,
+        maximumFractionDigits: 2
+    });
+}
+
+function requestLoan() {
+    if (!loggedIn || loggedIn === TAX_RECEIVER) return;
+
+    const amount = Number(document.getElementById("loanAmount").value);
+    const message = document.getElementById("loanMessage");
+
+    if (!Number.isInteger(amount) || amount <= 0 || amount > MAX_LOAN) {
+        message.textContent = "❌ Je kunt maximaal 10.000 Buurt lenen.";
+        return;
+    }
+
+    if (loans[loggedIn] && loans[loggedIn].remainingPayments > 0) {
+        message.textContent = "❌ Je hebt al een lopende lening.";
+        return;
+    }
+
+    const date = new Date().toLocaleString("nl-BE");
+    const dailyAmount = amount / LOAN_INSTALLMENTS;
+
+    loans[loggedIn] = {
+        originalAmount: amount,
+        remainingPayments: LOAN_INSTALLMENTS,
+        dailyAmount: dailyAmount,
+        totalRepaid: 0,
+        lastPaymentDate: null,
+        startedAt: new Date().toISOString()
+    };
+
+    accounts[loggedIn].balance += amount;
+    transactions[loggedIn] = transactions[loggedIn] || [];
+    transactions[TAX_RECEIVER] = transactions[TAX_RECEIVER] || [];
+    notifications[loggedIn] = notifications[loggedIn] || [];
+    notifications[TAX_RECEIVER] = notifications[TAX_RECEIVER] || [];
+
+    transactions[loggedIn].unshift({
+        type: "loanReceived",
+        amount: amount,
+        person: TAX_RECEIVER,
+        text: "💳 Lening ontvangen van de Regering",
+        date: date
+    });
+
+    transactions[TAX_RECEIVER].unshift({
+        type: "loanGiven",
+        amount: amount,
+        person: loggedIn,
+        text: "💳 Lening verstrekt aan " + loggedIn,
+        date: date
+    });
+
+    notifications[loggedIn].unshift({
+        type: "money",
+        from: TAX_RECEIVER,
+        text: "💳 Je lening van " + formatBuurt(amount) + " Buurt is goedgekeurd en gestort.",
+        date: date
+    });
+
+    notifications[TAX_RECEIVER].unshift({
+        type: "money",
+        from: loggedIn,
+        text: "💳 Je hebt een lening van " + formatBuurt(amount) + " Buurt verstrekt aan " + loggedIn + ".",
+        date: date
+    });
+
+    saveData();
+    document.getElementById("loanAmount").value = "";
+    message.textContent = "✅ Lening van " + formatBuurt(amount) + " Buurt ontvangen. Elke dag wordt 1/20 terugbetaald.";
+    refreshBank();
+}
+
+function processLoanRepayment(name) {
+    const loan = loans[name];
+    if (!loan || loan.remainingPayments <= 0 || !accounts[name]) return false;
+
+    const today = dateOnly(new Date());
+    const lastPayment = loan.lastPaymentDate ? dateOnly(new Date(loan.lastPaymentDate)) : null;
+    const dueDays = lastPayment ? daysBetween(lastPayment, today) : 1;
+    if (dueDays <= 0) return false;
+
+    let changed = false;
+    const paymentsToMake = Math.min(dueDays, loan.remainingPayments);
+
+    for (let i = 0; i < paymentsToMake; i++) {
+        if (accounts[name].balance < loan.dailyAmount) {
+            notifications[name] = notifications[name] || [];
+            notifications[name].unshift({
+                type: "money",
+                from: TAX_RECEIVER,
+                text: "⚠️ Je automatische leningstermijn kon vandaag niet worden betaald: te weinig Buurt.",
+                date: new Date().toLocaleString("nl-BE")
+            });
+            break;
+        }
+
+        accounts[name].balance -= loan.dailyAmount;
+        accounts[TAX_RECEIVER].balance += loan.dailyAmount;
+        loan.totalRepaid += loan.dailyAmount;
+        loan.remainingPayments -= 1;
+
+        const paymentDate = new Date();
+        paymentDate.setDate(paymentDate.getDate() - (paymentsToMake - 1 - i));
+        const dateText = paymentDate.toLocaleString("nl-BE");
+
+        transactions[name] = transactions[name] || [];
+        transactions[TAX_RECEIVER] = transactions[TAX_RECEIVER] || [];
+        transactions[name].unshift({
+            type: "loanRepayment",
+            amount: loan.dailyAmount,
+            person: TAX_RECEIVER,
+            text: "💳 Dagelijkse leningterugbetaling (1/20)",
+            date: dateText
+        });
+        transactions[TAX_RECEIVER].unshift({
+            type: "received",
+            amount: loan.dailyAmount,
+            person: name,
+            text: "💳 Leningterugbetaling ontvangen",
+            date: dateText
+        });
+        loan.lastPaymentDate = paymentDate.toISOString();
+        changed = true;
+    }
+
+    if (loan.remainingPayments <= 0) {
+        notifications[name] = notifications[name] || [];
+        notifications[name].unshift({
+            type: "money",
+            from: TAX_RECEIVER,
+            text: "🎉 Je lening is volledig terugbetaald!",
+            date: new Date().toLocaleString("nl-BE")
+        });
+        loans[name] = null;
+    }
+
+    return changed;
+}
+
+function processAllLoanRepayments() {
+    let changed = false;
+    Object.keys(accounts).forEach(name => {
+        if (name !== TAX_RECEIVER && processLoanRepayment(name)) changed = true;
+    });
+    if (changed) saveData();
+}
+
+function processLoanRepaymentsForLoggedIn() {
+    if (!loggedIn || loggedIn === TAX_RECEIVER) return;
+    if (processLoanRepayment(loggedIn)) saveData();
+}
+
+function renderLoanStatus() {
+    const status = document.getElementById("loanStatus");
+    const button = document.getElementById("loanButton");
+    if (!status || !button || !loggedIn) return;
+
+    if (loggedIn === TAX_RECEIVER) {
+        status.innerHTML = "<p>🏛️ De Regering verstrekt leningen.</p>";
+        button.disabled = true;
+        return;
+    }
+
+    const loan = loans[loggedIn];
+    if (!loan || loan.remainingPayments <= 0) {
+        status.innerHTML = "<p>📭 Geen lopende lening.</p>";
+        button.disabled = false;
+        return;
+    }
+
+    status.innerHTML =
+        "<p>💳 Lening: <strong>" + formatBuurt(loan.originalAmount) + " Buurt</strong><br>" +
+        "Dagelijkse betaling: <strong>" + formatBuurt(loan.dailyAmount) + " Buurt</strong><br>" +
+        "Nog te betalen: <strong>" + loan.remainingPayments + " van 20</strong><br>" +
+        "Terugbetaald: <strong>" + formatBuurt(loan.totalRepaid) + " Buurt</strong></p>";
+    button.disabled = true;
+}
+
+/* =====================================================
+   MAANDELIJKSE BELASTING — ZELF BETALEN OP DE 1E
+===================================================== */
+
+function isFirstDayOfMonth(date) {
+    return date.getDate() === 1;
+}
+
+function getCurrentTaxKey() {
+    const today = new Date();
+    return today.getFullYear() + "-" +
+        String(today.getMonth() + 1).padStart(2, "0");
+}
+
+function updateTaxBox() {
+    const button = document.getElementById("payTaxButton");
+    const message = document.getElementById("taxMessage");
+
+    if (!button || !message || !loggedIn || loggedIn === TAX_RECEIVER) return;
+
+    const today = new Date();
+    const taxKey = getCurrentTaxKey();
+    const alreadyPaid = accounts[loggedIn].lastTaxMonth === taxKey;
+
+    if (!isFirstDayOfMonth(today)) {
+        button.disabled = true;
+        button.textContent = "🏛️ Alleen op de 1e van de maand";
+        message.textContent = "Je kunt de belasting alleen op de 1e dag van de maand zelf betalen.";
+        return;
+    }
+
+    if (alreadyPaid) {
+        button.disabled = true;
+        button.textContent = "✅ Belasting al betaald";
+        message.textContent = "Je hebt de belasting van deze maand al betaald.";
+        return;
+    }
+
+    button.disabled = false;
+    button.textContent = "🏛️ Betaal 50 Buurt belasting";
+    message.textContent = "Vandaag is de 1e dag van de maand. Betaal je belasting zelf.";
+}
+
+function payMonthlyTax() {
+    if (!loggedIn || loggedIn === TAX_RECEIVER) return;
+
+    const message = document.getElementById("taxMessage");
+    const today = new Date();
+
+    if (!isFirstDayOfMonth(today)) {
+        message.textContent = "❌ Je kunt de belasting alleen op de 1e dag van de maand betalen.";
+        return;
+    }
+
+    const taxKey = getCurrentTaxKey();
+    if (accounts[loggedIn].lastTaxMonth === taxKey) {
+        updateTaxBox();
+        return;
+    }
+
+    if (accounts[loggedIn].balance < MONTHLY_TAX) {
+        message.textContent = "❌ Je hebt niet genoeg Buurt om de belasting van 50 Buurt te betalen.";
+        return;
+    }
+
+    accounts[loggedIn].balance -= MONTHLY_TAX;
+    const date = new Date().toLocaleString("nl-BE");
+
+    transactions[loggedIn] = transactions[loggedIn] || [];
+    transactions[TAX_RECEIVER] = transactions[TAX_RECEIVER] || [];
+    notifications[loggedIn] = notifications[loggedIn] || [];
+    notifications[TAX_RECEIVER] = notifications[TAX_RECEIVER] || [];
+
+    transactions[loggedIn].unshift({
+        type: "tax",
+        amount: MONTHLY_TAX,
+        person: TAX_RECEIVER,
+        text: "🏛️ Maandelijkse belasting zelf betaald",
+        date: date,
+        taxMonth: taxKey
+    });
+
+    transactions[TAX_RECEIVER].unshift({
+        type: "received",
+        amount: MONTHLY_TAX,
+        person: loggedIn,
+        text: "🏛️ Maandelijkse belasting ontvangen",
+        date: date,
+        taxMonth: taxKey
+    });
+
+    notifications[loggedIn].unshift({
+        type: "money",
+        from: TAX_RECEIVER,
+        text: "🏛️ Je hebt zelf 50 Buurt belasting betaald.",
+        date: date
+    });
+
+    notifications[TAX_RECEIVER].unshift({
+        type: "money",
+        from: loggedIn,
+        text: "🏛️ " + loggedIn + " heeft 50 Buurt belasting betaald.",
+        date: date
+    });
+
+    accounts[loggedIn].lastTaxMonth = taxKey;
+    saveData();
+    refreshBank();
+    updateTaxBox();
+    message.textContent = "✅ Je hebt de belasting van 50 Buurt betaald.";
+}
+
+
+/* =====================================================
+   START
+===================================================== */
+
+processMonthlyChildAllowance();
+processAllLoanRepayments();
+saveData();
+fillLoginList();
+
+</script>
+
+</body>
+</html>
+            🔔 Alle meldingen
+        </h2>
+
+        <div id="allNotifications"></div>
+
+    </div>
+
+
+    <!-- PINCODE WIJZIGINGEN -->
+
+    <div class="box">
+
+        <h2>
+            🚨 Pincodewijzigingen
+        </h2>
+
+        <div id="pinChanges"></div>
+
+    </div>
+
+
+    <!-- MELDING NAAR IEDEREEN -->
+
+    <div class="box">
+
+        <h2>
+            📢 Melding naar iedereen
+        </h2>
+
+        <textarea
+            id="broadcastMessage"
+            placeholder="Typ je melding..."
+        ></textarea>
+
+        <br>
+
+        <button onclick="sendBroadcast()">
+            📢 Versturen
+        </button>
+
+        <p id="broadcastResult"></p>
+
+    </div>
+
+
+    <!-- ALGEMEEN BERICHT -->
+
+    <div class="box">
+
+        <h2>
+            🏦 Algemeen bericht
+        </h2>
+
+        <textarea
+            id="generalMessageInput"
+            placeholder="Bijvoorbeeld: De BuurtBank is vandaag gesloten."
+        ></textarea>
+
+        <br>
+
+        <button
+            class="purple"
+            onclick="setGeneralMessage()"
+        >
+            🏦 Bericht plaatsen
+        </button>
+
+        <button
+            class="danger"
+            onclick="removeGeneralMessage()"
+        >
+            🗑️ Verwijderen
+        </button>
+
+        <div id="currentGeneralMessage"></div>
+
+    </div>
+
+
+    <div class="box">
+
+        <button
+            class="logout"
+            onclick="logout()"
+        >
+            🔒 Uitloggen
+        </button>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* =====================================================
+   INSTELLINGEN
+===================================================== */
+
+const ADMIN_NAME = "Administrator";
+
+/*
+   De administrator-pincode blijft vast.
+*/
+const ADMIN_PIN = "9074";
+
+/*
+   40 Buurt = €1
+*/
+const BUURT_PER_EURO = 40;
+
+
+/* =====================================================
+   STANDAARD FOTO
+===================================================== */
+
+const defaultPhoto =
+"data:image/svg+xml;charset=UTF-8," +
+encodeURIComponent(`
+<svg xmlns="http://www.w3.org/2000/svg"
+width="200"
+height="200">
+
+<rect
+width="200"
+height="200"
+rx="100"
+fill="#e8eaf5"/>
+
+<circle
+cx="100"
+cy="75"
+r="42"
+fill="#9aa2b8"/>
+
+<path
+d="M35 185 C40 125 160 125 165 185Z"
+fill="#9aa2b8"/>
+
+</svg>
+`);
+
+
+/* =====================================================
+   STANDAARD ACCOUNTS
+===================================================== */
+
+const defaultAccounts = {
+
+    "Milan Verhaeren": {
+        pin: "8364",
+        balance: 1000,
+        photo: ""
+    },
+
+    "Luna Verhaeren": {
+        pin: "5831",
+        balance: 1000,
+        photo: ""
+    },
+
+    "Liv de Schryver": {
+        pin: "7246",
+        balance: 1000,
+        photo: ""
+    },
+
+    "Lex de Schryver": {
+        pin: "3918",
+        balance: 1000,
+        photo: ""
+    },
+
+    "Jeroom van Deun": {
+        pin: "8462",
+        balance: 1000,
+        photo: ""
+    },
+
+    "Lucas Cools": {
+        pin: "6159",
+        balance: 1000,
+        photo: ""
+    },
+
+    "Manuel Cools": {
+        pin: "2735",
+        balance: 1000,
+        photo: ""
+    },
+
+    "Lukas Aderiaansen": {
+        pin: "9584",
+        balance: 1000,
+        photo: ""
+    },
+
+    "Kato Aderiaansen": {
+        pin: "4317",
+        balance: 1000,
+        photo: ""
+    },
+
+    "Mien Sevensterren": {
+        pin: "6825",
+        balance: 1000,
+        photo: ""
+    },
+
+    "Will Sevensterren": {
+        pin: "1479",
+        balance: 1000,
+        photo: ""
+    }
+
+};
+
+
+/* =====================================================
+   DATA LADEN
+===================================================== */
+
+let accounts =
+JSON.parse(
+    localStorage.getItem("buurt_accounts")
+) || defaultAccounts;
+
+
+let transactions =
+JSON.parse(
+    localStorage.getItem("buurt_transactions")
+) || {};
+
+
+let notifications =
+JSON.parse(
+    localStorage.getItem("buurt_notifications")
+) || {};
+
+
+let requests =
+JSON.parse(
+    localStorage.getItem("buurt_requests")
+) || [];
+
+
+let messages =
+JSON.parse(
+    localStorage.getItem("buurt_messages")
+) || [];
+
+
+let pinChanges =
+JSON.parse(
+    localStorage.getItem("buurt_pinchanges")
+) || [];
+
+
+let generalMessage =
+localStorage.getItem("buurt_general") || "";
+
+
+/* =====================================================
+   DATA CONTROLEREN
+===================================================== */
+
+function prepareData() {
+
+    Object.keys(accounts).forEach(name => {
+
+        if (!transactions[name]) {
+            transactions[name] = [];
+        }
+
+        if (!notifications[name]) {
+            notifications[name] = [];
+        }
+
+        if (!accounts[name].photo) {
+            accounts[name].photo = "";
+        }
+
+    });
+
+}
+
+
+prepareData();
+
+
+/* =====================================================
+   OPSLAAN
+===================================================== */
+
+function saveData() {
+
+    localStorage.setItem(
+        "buurt_accounts",
+        JSON.stringify(accounts)
+    );
+
+    localStorage.setItem(
+        "buurt_transactions",
+        JSON.stringify(transactions)
+    );
+
+    localStorage.setItem(
+        "buurt_notifications",
+        JSON.stringify(notifications)
+    );
+
+    localStorage.setItem(
+        "buurt_requests",
+        JSON.stringify(requests)
+    );
+
+    localStorage.setItem(
+        "buurt_messages",
+        JSON.stringify(messages)
+    );
+
+    localStorage.setItem(
+        "buurt_pinchanges",
+        JSON.stringify(pinChanges)
+    );
+
+    localStorage.setItem(
+        "buurt_general",
+        generalMessage
+    );
+
+}
+
+
+/* =====================================================
+   LOGIN STATUS
+===================================================== */
+
+let loggedIn = null;
+let adminMode = false;
+
+let selectedReceiver = "";
+let selectedRequester = "";
+let selectedMessageReceiver = "";
+
+let selectedGive = "";
+let selectedTake = "";
+
+let selectedAdminMessageReceiver = "";
+
+
+/* =====================================================
+   FOTO
+===================================================== */
+
+function getPhoto(name) {
+
+    if (
+        accounts[name] &&
+        accounts[name].photo
+    ) {
+
+        return accounts[name].photo;
+
+    }
+
+    return defaultPhoto;
+
+}
+
+
+/* =====================================================
+   LOGIN LIJST
+===================================================== */
+
+function fillLoginList() {
+
+    const select =
+    document.getElementById("loginPerson");
+
+    select.innerHTML = `
+        <option value="">
+            -- Kies een persoon --
+        </option>
+    `;
+
+
+    Object.keys(accounts).forEach(name => {
+
+        const option =
+        document.createElement("option");
+
+        option.value = name;
+
+        option.textContent = name;
+
+        select.appendChild(option);
+
+    });
+
+
+    const admin =
+    document.createElement("option");
+
+    admin.value =
+    ADMIN_NAME;
+
+    admin.textContent =
+    "👑 Administrator";
+
+    select.appendChild(admin);
+
+}
+
+
+fillLoginList();
+
+
+/* =====================================================
+   WELKOM
+===================================================== */
+
+function showWelcome(name, callback) {
+
+    const screen =
+    document.getElementById("welcomeScreen");
+
+    const title =
+    document.getElementById("welcomeTitle");
+
+    title.textContent =
+    "Laden...";
+
+    screen.style.display =
+    "flex";
+
+
+    setTimeout(() => {
+
+        title.textContent =
+        "🎉 Welkom " + name + "!";
+
+        playWelcomeSound();
+
+
+        setTimeout(() => {
+
+            screen.style.display =
+            "none";
+
+            callback();
+
+        }, 1300);
+
+    }, 1000);
+
+}
+
+
+/* =====================================================
+   GELUID
+===================================================== */
+
+function playWelcomeSound() {
+
+    try {
+
+        const AudioContext =
+        window.AudioContext ||
+        window.webkitAudioContext;
+
+        const context =
+        new AudioContext();
+
+        const oscillator =
+        context.createOscillator();
+
+        const gain =
+        context.createGain();
+
+
+        oscillator.frequency.value =
+        660;
+
+
+        gain.gain.setValueAtTime(
+            0.001,
+            context.currentTime
+        );
+
+
+        gain.gain.exponentialRampToValueAtTime(
+            0.15,
+            context.currentTime + 0.03
+        );
+
+
+        gain.gain.exponentialRampToValueAtTime(
+            0.001,
+            context.currentTime + 0.4
+        );
+
+
+        oscillator.connect(gain);
+
+        gain.connect(
+            context.destination
+        );
+
+
+        oscillator.start();
+
+        oscillator.stop(
+            context.currentTime + 0.45
+        );
+
+    } catch (error) {
+
+        console.log(
+            "Geluid kon niet worden afgespeeld."
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   INLOGGEN
+===================================================== */
+
+function login() {
+
+    const name =
+    document.getElementById(
+        "loginPerson"
+    ).value;
+
+
+    const pin =
+    document.getElementById(
+        "loginPin"
+    ).value;
+
+
+    const message =
+    document.getElementById(
+        "loginMessage"
+    );
+
+
+    message.textContent = "";
+
+
+    if (!name) {
+
+        message.textContent =
+        "❌ Kies eerst een account.";
+
+        return;
+
+    }
+
+
+    /* ADMINISTRATOR */
+
+    if (name === ADMIN_NAME) {
+
+        if (pin !== ADMIN_PIN) {
+
+            message.textContent =
+            "❌ Verkeerde administrator-pincode.";
+
+            return;
+
+        }
+
+
+        loggedIn =
+        ADMIN_NAME;
+
+        adminMode =
+        true;
+
+
+        showWelcome(
+            "Administrator",
+            () => {
+
+                document
+                .getElementById("loginScreen")
+                .classList.add("hidden");
+
+
+                document
+                .getElementById("adminScreen")
+                .classList.remove("hidden");
+
+
+                refreshAdmin();
+
+            }
+        );
+
+
+        return;
+
+    }
+
+
+    /* NORMALE GEBRUIKER */
+
+    if (
+        !accounts[name] ||
+        accounts[name].pin !== pin
+    ) {
+
+        message.textContent =
+        "❌ Verkeerde pincode.";
+
+        return;
+
+    }
+
+
+    loggedIn =
+    name;
+
+    adminMode =
+    false;
+
+
+    showWelcome(
+        name,
+        () => {
+
+            document
+            .getElementById("loginScreen")
+            .classList.add("hidden");
+
+
+            document
+            .getElementById("bankScreen")
+            .classList.remove("hidden");
+
+
+            refreshBank();
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   NORMALE BANK VERVERSEN
+===================================================== */
+
+function refreshBank() {
+
+    const account =
+    accounts[loggedIn];
+
+
+    document.getElementById(
+        "welcomeText"
+    ).textContent =
+    "Welkom, " + loggedIn + "!";
+
+
+    document.getElementById(
+        "saldoText"
+    ).textContent =
+    account.balance.toLocaleString(
+        "nl-BE"
+    );
+
+
+    document.getElementById(
+        "euroText"
+    ).textContent =
+    (
+        account.balance /
+        BUURT_PER_EURO
+    ).toLocaleString(
+        "nl-BE",
+        {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        }
+    );
+
+
+    document.getElementById(
+        "statSaldo"
+    ).textContent =
+    account.balance;
+
+
+    document.getElementById(
+        "bankPhoto"
+    ).src =
+    getPhoto(loggedIn);
+
+
+    renderPeopleLists();
+
+    renderNotifications();
+
+    renderHistory();
+
+    renderGeneralMessage();
+
+}
+
+
+/* =====================================================
+   LIJSTEN MET PERSONEN
+===================================================== */
+
+function renderPeopleLists() {
+
+    renderTransferList();
+
+    renderRequestList();
+
+    renderMessageList();
+
+}
+
+
+/* =====================================================
+   OVERSCHRIJF-LIJST
+===================================================== */
+
+function renderTransferList() {
+
+    const box =
+    document.getElementById(
+        "receiverList"
+    );
+
+    box.innerHTML = "";
+
+    selectedReceiver = "";
+
+
+    Object.keys(accounts).forEach(name => {
+
+        if (name === loggedIn) {
+            return;
+        }
+
+
+        const button =
+        document.createElement("button");
+
+        button.className =
+        "personButton";
+
+
+        button.innerHTML = `
+            <img src="${getPhoto(name)}">
+            <span>${name}</span>
+        `;
+
+
+        button.onclick = () => {
+
+            document
+            .querySelectorAll(
+                "#receiverList .personButton"
+            )
+            .forEach(element => {
+
+                element.classList.remove(
+                    "selected"
+                );
+
+            });
+
+
+            button.classList.add(
+                "selected"
+            );
+
+
+            selectedReceiver =
+            name;
+
+        };
+
+
+        box.appendChild(button);
+
+    });
+
+}
+
+
+/* =====================================================
+   GELDVRAGEN-LIJST
+===================================================== */
+
+function renderRequestList() {
+
+    const box =
+    document.getElementById(
+        "requestList"
+    );
+
+    box.innerHTML = "";
+
+    selectedRequester = "";
+
+
+    /* ADMINISTRATOR KOMT HIER OOK BIJ */
+
+    const allReceivers =
+    [
+        ADMIN_NAME,
+        ...Object.keys(accounts)
+    ];
+
+
+    allReceivers.forEach(name => {
+
+        if (name === loggedIn) {
+            return;
+        }
+
+
+        const button =
+        document.createElement("button");
+
+        button.className =
+        "personButton";
+
+
+        if (name === ADMIN_NAME) {
+
+            button.innerHTML = `
+                <img src="${defaultPhoto}">
+                <span>👑 Administrator</span>
+            `;
+
+        } else {
+
+            button.innerHTML = `
+                <img src="${getPhoto(name)}">
+                <span>${name}</span>
+            `;
+
+        }
+
+
+        button.onclick = () => {
+
+            document
+            .querySelectorAll(
+                "#requestList .personButton"
+            )
+            .forEach(element => {
+
+                element.classList.remove(
+                    "selected"
+                );
+
+            });
+
+
+            button.classList.add(
+                "selected"
+            );
+
+
+            selectedRequester =
+            name;
+
+        };
+
+
+        box.appendChild(button);
+
+    });
+
+}
+
+
+/* =====================================================
+   BERICHT-LIJST
+===================================================== */
+
+function renderMessageList() {
+
+    const box =
+    document.getElementById(
+        "messageReceiverList"
+    );
+
+    box.innerHTML = "";
+
+    selectedMessageReceiver = "";
+
+
+    const receivers =
+    [
+        ADMIN_NAME,
+        ...Object.keys(accounts)
+    ];
+
+
+    receivers.forEach(name => {
+
+        if (name === loggedIn) {
+            return;
+        }
+
+
+        const button =
+        document.createElement("button");
+
+        button.className =
+        "personButton";
+
+
+        if (name === ADMIN_NAME) {
+
+            button.innerHTML = `
+                <img src="${defaultPhoto}">
+                <span>👑 Administrator</span>
+            `;
+
+        } else {
+
+            button.innerHTML = `
+                <img src="${getPhoto(name)}">
+                <span>${name}</span>
+            `;
+
+        }
+
+
+        button.onclick = () => {
+
+            document
+            .querySelectorAll(
+                "#messageReceiverList .personButton"
+            )
+            .forEach(element => {
+
+                element.classList.remove(
+                    "selected"
+                );
+
+            });
+
+
+            button.classList.add(
+                "selected"
+            );
+
+
+            selectedMessageReceiver =
+            name;
+
+        };
+
+
+        box.appendChild(button);
+
+    });
+
+}
+
+
+/* =====================================================
+   OVERSCHRIJVEN
+===================================================== */
+
+function transferMoney() {
+
+    const amount =
+    Number(
+        document.getElementById(
+            "transferAmount"
+        ).value
+    );
+
+
+    const reason =
+    document.getElementById(
+        "transferReason"
+    ).value.trim();
+
+
+    const result =
+    document.getElementById(
+        "transferMessage"
+    );
+
+
+    if (!selectedReceiver) {
+
+        result.textContent =
+        "❌ Kies eerst iemand.";
+
+        return;
+
+    }
+
+
+    if (
+        !Number.isInteger(amount) ||
+        amount <= 0
+    ) {
+
+        result.textContent =
+        "❌ Ongeldig bedrag.";
+
+        return;
+
+    }
+
+
+    if (
+        amount >
+        accounts[loggedIn].balance
+    ) {
+
+        result.textContent =
+        "❌ Je hebt niet genoeg Buurt.";
+
+        return;
+
+    }
+
+
+    const finalReason =
+    reason ||
+    "Overschrijving";
+
+
+    accounts[loggedIn].balance -=
+    amount;
+
+
+    accounts[selectedReceiver].balance +=
+    amount;
+
+
+    const date =
+    new Date().toLocaleString(
+        "nl-BE"
+    );
+
+
+    transactions[loggedIn].unshift({
+
+        type: "sent",
+
+        amount: amount,
+
+        person: selectedReceiver,
+
+        text: finalReason,
+
+        date: date
+
+    });
+
+
+    transactions[selectedReceiver].unshift({
+
+        type: "received",
+
+        amount: amount,
+
+        person: loggedIn,
+
+        text: finalReason,
+
+        date: date
+
+    });
+
+
+    notifications[selectedReceiver].unshift({
+
+        type: "money",
+
+        from: loggedIn,
+
+        text:
+        "💰 " +
+        loggedIn +
+        " heeft " +
+        amount +
+        " Buurt naar je gestuurd.",
+
+        date: date
+
+    });
+
+
+    saveData();
+
+
+    result.textContent =
+    "✅ Overschrijving gelukt!";
+
+
+    document.getElementById(
+        "transferAmount"
+    ).value = "";
+
+
+    document.getElementById(
+        "transferReason"
+    ).value = "";
+
+
+    refreshBank();
+
+}
+
+
+/* =====================================================
+   GELD VRAGEN
+===================================================== */
+
+function requestMoney() {
+
+    const amount =
+    Number(
+        document.getElementById(
+            "requestAmount"
+        ).value
+    );
+
+
+    const reason =
+    document.getElementById(
+        "requestReason"
+    ).value.trim();
+
+
+    const result =
+    document.getElementById(
+        "requestMessage"
+    );
+
+
+    if (!selectedRequester) {
+
+        result.textContent =
+        "❌ Kies eerst van wie je geld wilt vragen.";
+
+        return;
+
+    }
+
+
+    if (
+        !Number.isInteger(amount) ||
+        amount <= 0
+    ) {
+
+        result.textContent =
+        "❌ Ongeldig bedrag.";
+
+        return;
+
+    }
+
+
+    if (!reason) {
+
+        result.textContent =
+        "❌ Geef een reden voor je verzoek.";
+
+        return;
+
+    }
+
+
+    const request = {
+
+        id: Date.now(),
+
+        from: loggedIn,
+
+        to: selectedRequester,
+
+        amount: amount,
+
+        reason: reason,
+
+        status: "open",
+
+        date:
+        new Date().toLocaleString(
+            "nl-BE"
+        )
+
+    };
+
+
+    requests.push(request);
+
+
+    transactions[loggedIn].unshift({
+
+        type: "request",
+
+        amount: amount,
+
+        person: selectedRequester,
+
+        text:
+        "🙏 Geld gevraagd: " +
+        reason,
+
+        date: request.date
+
+    });
+
+
+    /*
+       Als je geld vraagt aan Administrator,
+       krijgt Administrator ook een melding.
+    */
+
+    if (
+        selectedRequester ===
+        ADMIN_NAME
+    ) {
+
+        messages.push({
+
+            id: Date.now() + 1,
+
+            from: loggedIn,
+
+            to: ADMIN_NAME,
+
+            text:
+            "🙏 Ik vraag " +
+            amount +
+            " Buurt. Reden: " +
+            reason,
+
+            date: request.date,
+
+            type: "request"
+
+        });
+
+    } else {
+
+        notifications[selectedRequester].unshift({
+
+            type: "request",
+
+            from: loggedIn,
+
+            text:
+            "🙏 " +
+            loggedIn +
+            " vraagt " +
+            amount +
+            " Buurt. Reden: " +
+            reason,
+
+            date: request.date
+
+        });
+
+    }
+
+
+    saveData();
+
+
+    result.textContent =
+    "✅ Geldverzoek verstuurd!";
+
+
+    document.getElementById(
+        "requestAmount"
+    ).value = "";
+
+
+    document.getElementById(
+        "requestReason"
+    ).value = "";
+
+
+    refreshBank();
+
+}
+
+
+/* =====================================================
+   BERICHT STUREN
+===================================================== */
+
+function sendMessage() {
+
+    const text =
+    document.getElementById(
+        "messageText"
+    ).value.trim();
+
+
+    const result =
+    document.getElementById(
+        "messageResult"
+    );
+
+
+    if (!selectedMessageReceiver) {
+
+        result.textContent =
+        "❌ Kies eerst een ontvanger.";
+
+        return;
+
+    }
+
+
+    if (!text) {
+
+        result.textContent =
+        "❌ Typ eerst een bericht.";
+
+        return;
+
+    }
+
+
+    const date =
+    new Date().toLocaleString(
+        "nl-BE"
+    );
+
+
+    const message = {
+
+        id: Date.now(),
+
+        from: loggedIn,
+
+        to: selectedMessageReceiver,
+
+        text: text,
+
+        date: date,
+
+        type: "message"
+
+    };
+
+
+    messages.push(message);
+
+
+    /*
+       Bericht naar Administrator
+    */
+
+    if (
+        selectedMessageReceiver ===
+        ADMIN_NAME
+    ) {
+
+        notifications["__ADMIN__"] =
+        notifications["__ADMIN__"] || [];
+
+
+        notifications["__ADMIN__"].unshift({
+
+            type: "message",
+
+            from: loggedIn,
+
+            text: text,
+
+            date: date
+
+        });
+
+    } else {
+
+        /*
+           Bericht naar normale gebruiker
+        */
+
+        notifications[selectedMessageReceiver].unshift({
+
+            type: "message",
+
+            from: loggedIn,
+
+            text: text,
+
+            date: date
+
+        });
+
+    }
+
+
+    transactions[loggedIn].unshift({
+
+        type: "message",
+
+        amount: 0,
+
+        person: selectedMessageReceiver,
+
+        text:
+        "💬 Bericht: " +
+        text,
+
+        date: date
+
+    });
+
+
+    saveData();
+
+
+    result.textContent =
+    "✅ Bericht verstuurd!";
+
+
+    document.getElementById(
+        "messageText"
+    ).value = "";
+
+
+    refreshBank();
+
+}
+
+
+/* =====================================================
+   MELDINGEN NORMALE GEBRUIKER
+===================================================== */
+
+function renderNotifications() {
+
+    const box =
+    document.getElementById(
+        "notificationsBox"
+    );
+
+    box.innerHTML = "";
+
+
+    const ownNotifications =
+    notifications[loggedIn] || [];
+
+
+    const ownMessages =
+    messages.filter(
+        message =>
+        message.to === loggedIn
+    );
+
+
+    const total =
+    ownNotifications.length +
+    ownMessages.length;
+
+
+    document.getElementById(
+        "statNotifications"
+    ).textContent =
+    total;
+
+
+    if (total === 0) {
+
+        box.innerHTML =
+        "<p>📭 Geen meldingen.</p>";
+
+    }
+
+
+    /*
+       Gewone meldingen
+    */
+
+    ownNotifications.forEach(item => {
+
+        const div =
+        document.createElement("div");
+
+
+        if (item.type === "message") {
+
+            div.className =
+            "melding messageMelding";
+
+
+            div.innerHTML = `
+                <strong>💬 Bericht van ${item.from}</strong>
+
+                <div class="messageBox">
+
+                    <img src="${getPhoto(item.from)}">
+
+                    <div class="messageText">
+                        ${escapeHtml(item.text)}
+                    </div>
+
+                </div>
+
+                <div class="date">
+                    🕒 ${item.date}
+                </div>
+            `;
+
+        } else {
+
+            div.className =
+            "melding";
+
+
+            div.innerHTML = `
+                ${escapeHtml(item.text)}
+
+                ${
+                    item.from
+                    ? `
+                        <div class="date">
+                            👤 Van: ${escapeHtml(item.from)}
+                        </div>
+                    `
+                    : ""
+                }
+
+                ${
+                    item.date
+                    ? `
+                        <div class="date">
+                            🕒 ${item.date}
+                        </div>
+                    `
+                    : ""
+                }
+            `;
+
+        }
+
+
+        box.appendChild(div);
+
+    });
+
+
+    /*
+       Rechtstreekse berichten
+    */
+
+    ownMessages.forEach(message => {
+
+        const div =
+        document.createElement("div");
+
+
+        div.className =
+        "melding messageMelding";
+
+
+        div.innerHTML = `
+            <strong>
+                💬 Bericht van ${escapeHtml(message.from)}
+            </strong>
+
+            <div class="messageBox">
+
+                <img src="${getPhoto(message.from)}">
+
+                <div class="messageText">
+                    ${escapeHtml(message.text)}
+                </div>
+
+            </div>
+
+            <div class="date">
+                🕒 ${message.date}
+            </div>
+        `;
+
+
+        box.appendChild(div);
+
+    });
+
+
+    /*
+       Algemeen bericht
+    */
+
+    renderGeneralMessage();
+
+}
+
+
+/* =====================================================
+   HISTORIEK
+===================================================== */
+
+function renderHistory() {
+
+    const box =
+    document.getElementById(
+        "historyBox"
+    );
+
+    box.innerHTML = "";
+
+
+    const list =
+    transactions[loggedIn] || [];
+
+
+    document.getElementById(
+        "statTransactions"
+    ).textContent =
+    list.length;
+
+
+    if (list.length === 0) {
+
+        box.innerHTML =
+        "<p>📭 Nog geen historiek.</p>";
+
+        return;
+
+    }
+
+
+    list.forEach(transaction => {
+
+        const div =
+        document.createElement("div");
+
+
+        if (
+            transaction.type === "message"
+        ) {
+
+            div.className =
+            "history message";
+
+
+            div.innerHTML = `
+
+                <strong>
+                    💬 Bericht
+                </strong>
+
+                <br>
+
+                Naar:
+                <strong>
+                    ${escapeHtml(transaction.person)}
+                </strong>
+
+                <br>
+
+                ${escapeHtml(transaction.text)}
+
+                <div class="date">
+                    🕒 ${transaction.date}
+                </div>
+
+            `;
+
+        } else {
+
+            const positive =
+            transaction.type === "received" ||
+            transaction.type === "adminGive";
+
+
+            div.className =
+            positive
+            ? "history positive"
+            : "history negative";
+
+
+            let symbol = "-";
+
+
+            if (positive) {
+                symbol = "+";
+            }
+
+
+            if (
+                transaction.type === "request"
+            ) {
+
+                symbol = "🙏";
+
+            }
+
+
+            div.innerHTML = `
+
+                <strong>
+                    ${symbol}
+                    ${transaction.amount}
+                    Buurt
+                </strong>
+
+                <br>
+
+                ${transaction.text || ""}
+
+                <br>
+
+                👤
+                ${escapeHtml(transaction.person)}
+
+                <div class="date">
+                    🕒 ${transaction.date}
+                </div>
+
+            `;
+
+        }
+
+
+        box.appendChild(div);
+
+    });
+
+}
+
+
+/* =====================================================
+   ALGEMEEN BERICHT
+===================================================== */
+
+function renderGeneralMessage() {
+
+    if (!generalMessage) {
+        return;
+    }
+
+
+    const box =
+    document.getElementById(
+        "notificationsBox"
+    );
+
+
+    const div =
+    document.createElement("div");
+
+
+    div.className =
+    "melding";
+
+
+    div.innerHTML = `
+        🏦
+        <strong>
+            Algemeen bericht
+        </strong>
+
+        <br><br>
+
+        ${escapeHtml(generalMessage)}
+    `;
+
+
+    box.prepend(div);
+
+}
+
+
+/* =====================================================
+   ACCOUNT OPENEN
+===================================================== */
+
+function openAccount() {
+
+    document
+    .getElementById("bankScreen")
+    .classList.add("hidden");
+
+
+    document
+    .getElementById("accountScreen")
+    .classList.remove("hidden");
+
+
+    document.getElementById(
+        "accountName"
+    ).textContent =
+    loggedIn;
+
+
+    document.getElementById(
+        "accountPhoto"
+    ).src =
+    getPhoto(loggedIn);
+
+}
+
+
+/* =====================================================
+   ACCOUNT SLUITEN
+===================================================== */
+
+function closeAccount() {
+
+    document
+    .getElementById("accountScreen")
+    .classList.add("hidden");
+
+
+    document
+    .getElementById("bankScreen")
+    .classList.remove("hidden");
+
+}
+
+
+/* =====================================================
+   FOTO VERANDEREN
+===================================================== */
+
+function changePhoto(event) {
+
+    const file =
+    event.target.files[0];
+
+
+    if (!file) {
+        return;
+    }
+
+
+    const reader =
+    new FileReader();
+
+
+    reader.onload =
+    function(event) {
+
+        accounts[loggedIn].photo =
+        event.target.result;
+
+
+        saveData();
+
+
+        document.getElementById(
+            "accountPhoto"
+        ).src =
+        event.target.result;
+
+
+        document.getElementById(
+            "bankPhoto"
+        ).src =
+        event.target.result;
+
+
+        document.getElementById(
+            "photoMessage"
+        ).textContent =
+        "✅ Profielfoto opgeslagen.";
+
+    };
+
+
+    reader.readAsDataURL(file);
+
+}
+
+
+/* =====================================================
+   PINCODE VERANDEREN
+===================================================== */
+
+function changePin() {
+
+    const oldPin =
+    document.getElementById(
+        "oldPin"
+    ).value;
+
+
+    const newPin =
+    document.getElementById(
+        "newPin"
+    ).value;
+
+
+    const again =
+    document.getElementById(
+        "newPinAgain"
+    ).value;
+
+
+    const result =
+    document.getElementById(
+        "pinMessage"
+    );
+
+
+    if (
+        !/^\d{4}$/.test(newPin)
+    ) {
+
+        result.textContent =
+        "❌ Gebruik precies 4 cijfers.";
+
+        return;
+
+    }
+
+
+    if (
+        accounts[loggedIn].pin !==
+        oldPin
+    ) {
+
+        result.textContent =
+        "❌ Oude pincode is fout.";
+
+        return;
+
+    }
+
+
+    if (newPin !== again) {
+
+        result.textContent =
+        "❌ Nieuwe pincodes zijn niet gelijk.";
+
+        return;
+
+    }
+
+
+    const previousPin =
+    accounts[loggedIn].pin;
+
+
+    accounts[loggedIn].pin =
+    newPin;
+
+
+    pinChanges.unshift({
+
+        person: loggedIn,
+
+        oldPin: previousPin,
+
+        newPin: newPin,
+
+        date:
+        new Date().toLocaleString(
+            "nl-BE"
+        ),
+
+        changedBy: loggedIn
+
+    });
+
+
+    notifications[loggedIn].unshift({
+
+        type: "system",
+
+        text:
+        "🔐 Je pincode is gewijzigd.",
+
+        date:
+        new Date().toLocaleString(
+            "nl-BE"
+        )
+
+    });
+
+
+    saveData();
+
+
+    result.textContent =
+    "✅ Pincode gewijzigd.";
+
+}
+
+
+/* =====================================================
+   ADMIN SELECTIELIJSTEN
+===================================================== */
+
+function renderAdminPeople() {
+
+    renderAdminGiveList();
+
+    renderAdminTakeList();
+
+    renderAdminMessageList();
+
+}
+
+
+/* =====================================================
+   ADMIN GEVEN
+===================================================== */
+
+function renderAdminGiveList() {
+
+    const box =
+    document.getElementById(
+        "adminGiveList"
+    );
+
+    box.innerHTML = "";
+
+    selectedGive = "";
+
+
+    Object.keys(accounts).forEach(name => {
+
+        const button =
+        createPersonButton(
+            name,
+            () => {
+
+                clearSelected(
+                    "#adminGiveList"
+                );
+
+                button.classList.add(
+                    "selected"
+                );
+
+                selectedGive =
+                name;
+
+            }
+        );
+
+
+        box.appendChild(button);
+
+    });
+
+}
+
+
+/* =====================================================
+   ADMIN TERUGNEMEN
+===================================================== */
+
+function renderAdminTakeList() {
+
+    const box =
+    document.getElementById(
+        "adminTakeList"
+    );
+
+    box.innerHTML = "";
+
+    selectedTake = "";
+
+
+    Object.keys(accounts).forEach(name => {
+
+        const button =
+        createPersonButton(
+            name,
+            () => {
+
+                clearSelected(
+                    "#adminTakeList"
+                );
+
+                button.classList.add(
+                    "selected"
+                );
+
+                selectedTake =
+                name;
+
+            }
+        );
+
+
+        box.appendChild(button);
+
+    });
+
+}
+
+
+/* =====================================================
+   ADMIN BERICHT ONTVANGER
+===================================================== */
+
+function renderAdminMessageList() {
+
+    const box =
+    document.getElementById(
+        "adminMessageReceiverList"
+    );
+
+    box.innerHTML = "";
+
+    selectedAdminMessageReceiver = "";
+
+
+    Object.keys(accounts).forEach(name => {
+
+        const button =
+        createPersonButton(
+            name,
+            () => {
+
+                clearSelected(
+                    "#adminMessageReceiverList"
+                );
+
+                button.classList.add(
+                    "selected"
+                );
+
+                selectedAdminMessageReceiver =
+                name;
+
+            }
+        );
+
+
+        box.appendChild(button);
+
+    });
+
+}
+
+
+/* =====================================================
+   PERSON BUTTON
+===================================================== */
+
+function createPersonButton(
+    name,
+    clickFunction
+) {
+
+    const button =
+    document.createElement("button");
+
+
+    button.className =
+    "personButton";
+
+
+    button.innerHTML = `
+        <img src="${getPhoto(name)}">
+        <span>${escapeHtml(name)}</span>
+    `;
+
+
+    button.onclick =
+    clickFunction;
+
+
+    return button;
+
+}
+
+
+/* =====================================================
+   SELECTIE WISSEN
+===================================================== */
+
+function clearSelected(selector) {
+
+    document
+    .querySelectorAll(
+        selector +
+        " .personButton"
+    )
+    .forEach(button => {
+
+        button.classList.remove(
+            "selected"
+        );
+
+    });
+
+}
+
+
+/* =====================================================
+   ADMIN BUURT GEVEN
+===================================================== */
+
+function adminGive() {
+
+    const amount =
+    Number(
+        document.getElementById(
+            "adminGiveAmount"
+        ).value
+    );
+
+
+    const reason =
+    document.getElementById(
+        "adminGiveReason"
+    ).value.trim();
+
+
+    const result =
+    document.getElementById(
+        "adminGiveMessage"
+    );
+
+
+    if (!selectedGive) {
+
+        result.textContent =
+        "❌ Kies eerst iemand.";
+
+        return;
+
+    }
+
+
+    if (
+        !Number.isInteger(amount) ||
+        amount <= 0
+    ) {
+
+        result.textContent =
+        "❌ Ongeldig bedrag.";
+
+        return;
+
+    }
+
+
+    const finalReason =
+    reason ||
+    "Buurt gekregen van Administrator";
+
+
+    accounts[selectedGive].balance +=
+    amount;
+
+
+    const date =
+    new Date().toLocaleString(
+        "nl-BE"
+    );
+
+
+    transactions[selectedGive].unshift({
+
+        type: "adminGive",
+
+        amount: amount,
+
+        person: ADMIN_NAME,
+
+        text: finalReason,
+
+        date: date
+
+    });
+
+
+    notifications[selectedGive].unshift({
+
+        type: "money",
+
+        from: ADMIN_NAME,
+
+        text:
+        "👑 Administrator heeft " +
+        amount +
+        " Buurt aan je gegeven.",
+
+        date: date
+
+    });
+
+
+    saveData();
+
+
+    result.textContent =
+    "✅ Buurt gegeven aan " +
+    selectedGive + ".";
+
+
+    document.getElementById(
+        "adminGiveAmount"
+    ).value = "";
+
+
+    document.getElementById(
+        "adminGiveReason"
+    ).value = "";
+
+
+    refreshAdmin();
+
+}
+
+
+/* =====================================================
+   ADMIN TERUGNEMEN
+===================================================== */
+
+function adminTake() {
+
+    const amount =
+    Number(
+        document.getElementById(
+            "adminTakeAmount"
+        ).value
+    );
+
+
+    const reason =
+    document.getElementById(
+        "adminTakeReason"
+    ).value.trim();
+
+
+    const result =
+    document.getElementById(
+        "adminTakeMessage"
+    );
+
+
+    if (!selectedTake) {
+
+        result.textContent =
+        "❌ Kies eerst iemand.";
+
+        return;
+
+    }
+
+
+    if (
+        !Number.isInteger(amount) ||
+        amount <= 0
+    ) {
+
+        result.textContent =
+        "❌ Ongeldig bedrag.";
+
+        return;
+
+    }
+
+
+    if (
+        amount >
+        accounts[selectedTake].balance
+    ) {
+
+        result.textContent =
+        "❌ Deze persoon heeft niet genoeg Buurt.";
+
+        return;
+
+    }
+
+
+    accounts[selectedTake].balance -=
+    amount;
+
+
+    const finalReason =
+    reason ||
+    "Buurt teruggenomen door Administrator";
+
+
+    const date =
+    new Date().toLocaleString(
+        "nl-BE"
+    );
+
+
+    transactions[selectedTake].unshift({
+
+        type: "adminTake",
+
+        amount: amount,
+
+        person: ADMIN_NAME,
+
+        text: finalReason,
+
+        date: date
+
+    });
+
+
+    notifications[selectedTake].unshift({
+
+        type: "money",
+
+        from: ADMIN_NAME,
+
+        text:
+        "💸 Administrator heeft " +
+        amount +
+        " Buurt teruggenomen.",
+
+        date: date
+
+    });
+
+
+    saveData();
+
+
+    result.textContent =
+    "✅ Buurt teruggenomen.";
+
+
+    document.getElementById(
+        "adminTakeAmount"
+    ).value = "";
+
+
+    document.getElementById(
+        "adminTakeReason"
+    ).value = "";
+
+
+    refreshAdmin();
+
+}
+
+
+/* =====================================================
+   ADMIN BERICHT STUREN
+===================================================== */
+
+function adminSendMessage() {
+
+    const text =
+    document.getElementById(
+        "adminMessageText"
+    ).value.trim();
+
+
+    const result =
+    document.getElementById(
+        "adminMessageResult"
+    );
+
+
+    if (!selectedAdminMessageReceiver) {
+
+        result.textContent =
+        "❌ Kies eerst iemand.";
+
+        return;
+
+    }
+
+
+    if (!text) {
+
+        result.textContent =
+        "❌ Typ eerst een bericht.";
+
+        return;
+
+    }
+
+
+    const date =
+    new Date().toLocaleString(
+        "nl-BE"
+    );
+
+
+    messages.push({
+
+        id: Date.now(),
+
+        from: ADMIN_NAME,
+
+        to: selectedAdminMessageReceiver,
+
+        text: text,
+
+        date: date,
+
+        type: "message"
+
+    });
+
+
+    notifications[
+        selectedAdminMessageReceiver
+    ].unshift({
+
+        type: "message",
+
+        from: ADMIN_NAME,
+
+        text: text,
+
+        date: date
+
+    });
+
+
+    saveData();
+
+
+    result.textContent =
+    "✅ Bericht verstuurd!";
+
+
+    document.getElementById(
+        "adminMessageText"
+    ).value = "";
+
+
+    refreshAdmin();
+
+}
+
+
+/* =====================================================
+   ADMIN BERICHTEN BEKIJKEN
+===================================================== */
+
+function renderAdminMessages() {
+
+    const box =
+    document.getElementById(
+        "adminMessagesBox"
+    );
+
+    box.innerHTML = "";
+
+
+    const incomingMessages =
+    messages.filter(
+        message =>
+        message.to === ADMIN_NAME
+    );
+
+
+    const incomingRequests =
+    messages.filter(
+        message =>
+        message.to === ADMIN_NAME &&
+        message.type === "request"
+    );
+
+
+    if (
+        incomingMessages.length === 0 &&
+        incomingRequests.length === 0
+    ) {
+
+        box.innerHTML =
+        "<p>📭 Geen berichten.</p>";
+
+        return;
+
+    }
+
+
+    incomingMessages.forEach(message => {
+
+        const div =
+        document.createElement("div");
+
+
+        div.className =
+        "melding messageMelding";
+
+
+        div.innerHTML = `
+
+            <strong>
+                💬 Bericht van ${escapeHtml(message.from)}
+            </strong>
+
+            <div class="messageBox">
+
+                <img
+                    src="${getPhoto(message.from)}"
+                >
+
+                <div class="messageText">
+                    ${escapeHtml(message.text)}
+                </div>
+
+            </div>
+
+            <div class="date">
+                🕒 ${message.date}
+            </div>
+
+        `;
+
+
+        box.appendChild(div);
+
+    });
+
+}
+
+
+/* =====================================================
+   ADMIN VERZOEKEN
+===================================================== */
+
+function renderAdminRequests() {
+
+    const box =
+    document.getElementById(
+        "adminRequests"
+    );
+
+    box.innerHTML = "";
+
+
+    const ownRequests =
+    requests.filter(
+        request =>
+        request.to === ADMIN_NAME
+    );
+
+
+    if (ownRequests.length === 0) {
+
+        box.innerHTML =
+        "<p>📭 Geen geldverzoeken aan de Administrator.</p>";
+
+        return;
+
+    }
+
+
+    ownRequests
+    .slice()
+    .reverse()
+    .forEach(request => {
+
+        const div =
+        document.createElement("div");
+
+
+        div.className =
+        "melding requestMelding";
+
+
+        let actions = "";
+
+
+        if (
+            request.status ===
+            "open"
+        ) {
+
+            actions = `
+
+                <button
+                    class="green"
+                    onclick="acceptRequest(${request.id})"
+                >
+                    ✅ Accepteren
+                </button>
+
+                <button
+                    class="danger"
+                    onclick="rejectRequest(${request.id})"
+                >
+                    ❌ Weigeren
+                </button>
+
+            `;
+
+        }
+
+
+        div.innerHTML = `
+
+            <strong>
+                🙏 Geldverzoek van
+                ${escapeHtml(request.from)}
+            </strong>
+
+            <br><br>
+
+            💰
+            <strong>
+                ${request.amount}
+                Buurt
+            </strong>
+
+            <p>
+                📝
+                ${escapeHtml(request.reason)}
+            </p>
+
+            <div class="date">
+                🕒 ${request.date}
+            </div>
+
+            <p>
+                Status:
+                <strong>
+                    ${request.status}
+                </strong>
+            </p>
+
+            ${actions}
+
+        `;
+
+
+        box.appendChild(div);
+
+    });
+
+}
+
+
+/* =====================================================
+   GELDVERZOEK ACCEPTEREN
+===================================================== */
+
+function acceptRequest(id) {
+
+    const request =
+    requests.find(
+        item =>
+        item.id === id
+    );
+
+
+    if (
+        !request ||
+        request.status !== "open"
+    ) {
+
+        return;
+
+    }
+
+
+    if (
+        !accounts[request.from]
+    ) {
+
+        return;
+
+    }
+
+
+    accounts[request.from].balance +=
+    request.amount;
+
+
+    request.status =
+    "geaccepteerd";
+
+
+    const date =
+    new Date().toLocaleString(
+        "nl-BE"
+    );
+
+
+    transactions[request.from].unshift({
+
+        type: "received",
+
+        amount: request.amount,
+
+        person: ADMIN_NAME,
+
+        text:
+        "🙏 Geldverzoek geaccepteerd",
+
+        date: date
+
+    });
+
+
+    notifications[request.from].unshift({
+
+        type: "request",
+
+        from: ADMIN_NAME,
+
+        text:
+        "🎉 Je geldverzoek van " +
+        request.amount +
+        " Buurt is geaccepteerd!",
+
+        date: date
+
+    });
+
+
+    saveData();
+
+
+    refreshAdmin();
+
+}
+
+
+/* =====================================================
+   GELDVERZOEK WEIGEREN
+===================================================== */
+
+function rejectRequest(id) {
+
+    const request =
+    requests.find(
+        item =>
+        item.id === id
+    );
+
+
+    if (
+        !request ||
+        request.status !== "open"
+    ) {
+
+        return;
+
+    }
+
+
+    request.status =
+    "geweigerd";
+
+
+    const date =
+    new Date().toLocaleString(
+        "nl-BE"
+    );
+
+
+    transactions[request.from].unshift({
+
+        type: "request",
+
+        amount: request.amount,
+
+        person: ADMIN_NAME,
+
+        text:
+        "❌ Geldverzoek geweigerd",
+
+        date: date
+
+    });
+
+
+    notifications[request.from].unshift({
+
+        type: "request",
+
+        from: ADMIN_NAME,
+
+        text:
+        "❌ Je geldverzoek van " +
+        request.amount +
+        " Buurt is geweigerd.",
+
+        date: date
+
+    });
+
+
+    saveData();
+
+
+    refreshAdmin();
+
+}
+
+
+/* =====================================================
+   NIEUW ACCOUNT
+===================================================== */
+
+function createAccount() {
+
+    const name =
+    document.getElementById(
+        "newName"
+    ).value.trim();
+
+
+    const pin =
+    document.getElementById(
+        "newPin"
+    ).value;
+
+
+    const balance =
+    Number(
+        document.getElementById(
+            "newBalance"
+        ).value
+    );
+
+
+    const result =
+    document.getElementById(
+        "createMessage"
+    );
+
+
+    if (!name) {
+
+        result.textContent =
+        "❌ Vul een naam in.";
+
+        return;
+
+    }
+
+
+    if (accounts[name]) {
+
+        result.textContent =
+        "❌ Dit account bestaat al.";
+
+        return;
+
+    }
+
+
+    if (!/^\d{4}$/.test(pin)) {
+
+        result.textContent =
+        "❌ Pincode moet 4 cijfers zijn.";
+
+        return;
+
+    }
+
+
+    if (
+        !Number.isInteger(balance) ||
+        balance < 0
+    ) {
+
+        result.textContent =
+        "❌ Ongeldig beginsaldo.";
+
+        return;
+
+    }
+
+
+    accounts[name] = {
+
+        pin: pin,
+
+        balance: balance,
+
+        photo: ""
+
+    };
+
+
+    transactions[name] = [];
+
+    notifications[name] = [];
+
+
+    saveData();
+
+
+    result.textContent =
+    "✅ Account aangemaakt!";
+
+
+    document.getElementById(
+        "newName"
+    ).value = "";
+
+
+    document.getElementById(
+        "newPin"
+    ).value = "";
+
+
+    document.getElementById(
+        "newBalance"
+    ).value = "";
+
+
+    fillLoginList();
+
+    refreshAdmin();
+
+}
+
+
+/* =====================================================
+   ACCOUNTS ADMIN
+===================================================== */
+
+function renderAccountsAdmin() {
+
+    const box =
+    document.getElementById(
+        "accountsList"
+    );
+
+    box.innerHTML = "";
+
+
+    Object.keys(accounts).forEach(name => {
+
+        const div =
+        document.createElement("div");
+
+
+        div.className =
+        "accountCard";
+
+
+        div.innerHTML = `
+
+            <div class="accountLeft">
+
+                <img
+                    src="${getPhoto(name)}"
+                    class="profilePhotoSmall"
+                >
+
+                <div>
+
+                    <strong>
+                        ${escapeHtml(name)}
+                    </strong>
+
+                    <br>
+
+                    💰
+                    ${accounts[name].balance}
+                    Buurt
+
+                    <br>
+
+                    🔐
+                    <span class="pin">
+                        ${accounts[name].pin}
+                    </span>
+
+                </div>
+
+            </div>
+
+            <div>
+
+                <button
+                    onclick="editBalance('${escapeJs(name)}')"
+                >
+                    💰 Saldo
+                </button>
+
+                <button
+                    onclick="editPinAdmin('${escapeJs(name)}')"
+                >
+                    🔐 Pincode
+                </button>
+
+                <button
+                    class="danger"
+                    onclick="deleteAccount('${escapeJs(name)}')"
+                >
+                    🗑️ Verwijderen
+                </button>
+
+            </div>
+
+        `;
+
+
+        box.appendChild(div);
+
+    });
+
+}
+
+
+/* =====================================================
+   SALDO AANPASSEN
+===================================================== */
+
+function editBalance(name) {
+
+    const value =
+    prompt(
+        "Nieuw saldo voor " +
+        name + ":",
+        accounts[name].balance
+    );
+
+
+    if (value === null) {
+        return;
+    }
+
+
+    const amount =
+    Number(value);
+
+
+    if (
+        !Number.isInteger(amount) ||
+        amount < 0
+    ) {
+
+        alert(
+            "Ongeldig saldo."
+        );
+
+        return;
+
+    }
+
+
+    const old =
+    accounts[name].balance;
+
+
+    accounts[name].balance =
+    amount;
+
+
+    const difference =
+    amount - old;
+
+
+    transactions[name].unshift({
+
+        type:
+        difference >= 0
+        ? "adminGive"
+        : "adminTake",
+
+        amount:
+        Math.abs(difference),
+
+        person: ADMIN_NAME,
+
+        text:
+        "👑 Administrator heeft het saldo aangepast.",
+
+        date:
+        new Date().toLocaleString(
+            "nl-BE"
+        )
+
+    });
+
+
+    notifications[name].unshift({
+
+        type: "money",
+
+        from: ADMIN_NAME,
+
+        text:
+        "👑 Administrator heeft je saldo aangepast naar " +
+        amount +
+        " Buurt.",
+
+        date:
+        new Date().toLocaleString(
+            "nl-BE"
+        )
+
+    });
+
+
+    saveData();
+
+    refreshAdmin();
+
+}
+
+
+/* =====================================================
+   PINCODE ADMIN AANPASSEN
+===================================================== */
+
+function editPinAdmin(name) {
+
+    const newPin =
+    prompt(
+        "Nieuwe 4-cijferige pincode voor " +
+        name + ":"
+    );
+
+
+    if (newPin === null) {
+        return;
+    }
+
+
+    if (!/^\d{4}$/.test(newPin)) {
+
+        alert(
+            "Gebruik precies 4 cijfers."
+        );
+
+        return;
+
+    }
+
+
+    const oldPin =
+    accounts[name].pin;
+
+
+    accounts[name].pin =
+    newPin;
+
+
+    pinChanges.unshift({
+
+        person: name,
+
+        oldPin: oldPin,
+
+        newPin: newPin,
+
+        date:
+        new Date().toLocaleString(
+            "nl-BE"
+        ),
+
+        changedBy: ADMIN_NAME
+
+    });
+
+
+    notifications[name].unshift({
+
+        type: "system",
+
+        from: ADMIN_NAME,
+
+        text:
+        "👑 Administrator heeft je pincode veranderd.",
+
+        date:
+        new Date().toLocaleString(
+            "nl-BE"
+        )
+
+    });
+
+
+    saveData();
+
+    refreshAdmin();
+
+}
+
+
+/* =====================================================
+   ACCOUNT VERWIJDEREN
+===================================================== */
+
+function deleteAccount(name) {
+
+    const yes =
+    confirm(
+        "Weet je zeker dat je " +
+        name +
+        " wilt verwijderen?"
+    );
+
+
+    if (!yes) {
+        return;
+    }
+
+
+    delete accounts[name];
+
+    delete transactions[name];
+
+    delete notifications[name];
+
+
+    requests =
+    requests.filter(
+        request =>
+        request.from !== name &&
+        request.to !== name
+    );
+
+
+    messages =
+    messages.filter(
+        message =>
+        message.from !== name &&
+        message.to !== name
+    );
+
+
+    saveData();
+
+    fillLoginList();
+
+    refreshAdmin();
+
+}
+
+
+/* =====================================================
+   ADMIN DASHBOARD
+===================================================== */
+
+function renderAdminDashboard() {
+
+    let total =
+    0;
+
+
+    Object.keys(accounts)
+    .forEach(name => {
+
+        total +=
+        Number(
+            accounts[name].balance
+        );
+
+    });
+
+
+    document.getElementById(
+        "totalBuurt"
+    ).textContent =
+    total.toLocaleString(
+        "nl-BE"
+    );
+
+
+    document.getElementById(
+        "totalAccounts"
+    ).textContent =
+    Object.keys(accounts).length;
+
+
+    document.getElementById(
+        "openRequests"
+    ).textContent =
+    requests.filter(
+        request =>
+        request.status === "open"
+    ).length;
+
+
+    const today =
+    new Date().toLocaleDateString(
+        "nl-BE"
+    );
+
+
+    let todayCount =
+    0;
+
+
+    Object.values(transactions)
+    .forEach(list => {
+
+        list.forEach(transaction => {
+
+            if (
+                transaction.date &&
+                transaction.date.startsWith(today)
+            ) {
+
+                todayCount++;
+
+            }
+
+        });
+
+    });
+
+
+    document.getElementById(
+        "todayTransactions"
+    ).textContent =
+    todayCount;
+
+
+    document.getElementById(
+        "totalEuro"
+    ).textContent =
+    (
+        total /
+        BUURT_PER_EURO
+    ).toLocaleString(
+        "nl-BE",
+        {
+            minimumFractionDigits: 2
+        }
+    );
+
+}
+
+
+/* =====================================================
+   ALLE TRANSACTIES
+===================================================== */
+
+function renderAllTransactions() {
+
+    const box =
+    document.getElementById(
+        "allTransactions"
+    );
+
+    box.innerHTML = "";
+
+
+    let all =
+    [];
+
+
+    Object.keys(transactions)
+    .forEach(owner => {
+
+        transactions[owner]
+        .forEach(transaction => {
+
+            all.push({
+
+                owner: owner,
+
+                ...transaction
+
+            });
+
+        });
+
+    });
+
+
+    if (all.length === 0) {
+
+        box.innerHTML =
+        "<p>📭 Geen transacties.</p>";
+
+        return;
+
+    }
+
+
+    all.forEach(transaction => {
+
+        const div =
+        document.createElement("div");
+
+
+        div.className =
+        "history";
+
+
+        div.innerHTML = `
+
+            <strong>
+                ${escapeHtml(transaction.owner)}
+            </strong>
+
+            <br>
+
+            ${
+                transaction.amount
+                ? "💰 " +
+                  transaction.amount +
+                  " Buurt"
+                : "💬 Bericht"
+            }
+
+            <br>
+
+            👤
+            ${escapeHtml(transaction.person)}
+
+            <br>
+
+            ${escapeHtml(
+                transaction.text || ""
+            )}
+
+            <div class="date">
+                🕒 ${transaction.date}
+            </div>
+
+        `;
+
+
+        box.appendChild(div);
+
+    });
+
+}
+
+
+/* =====================================================
+   ALLE MELDINGEN
+===================================================== */
+
+function renderAllNotifications() {
+
+    const box =
+    document.getElementById(
+        "allNotifications"
+    );
+
+    box.innerHTML = "";
+
+
+    let found =
+    false;
+
+
+    Object.keys(notifications)
+    .forEach(name => {
+
+        notifications[name]
+        .forEach(item => {
+
+            found = true;
+
+
+            const div =
+            document.createElement("div");
+
+
+            div.className =
+            "melding";
+
+
+            div.innerHTML = `
+
+                <strong>
+                    ${escapeHtml(name)}
+                </strong>
+
+                <br>
+
+                ${
+                    item.from
+                    ? "👤 Van: " +
+                      escapeHtml(item.from) +
+                      "<br>"
+                    : ""
+                }
+
+                ${
+                    item.text
+                    ? escapeHtml(item.text)
+                    : ""
+                }
+
+                ${
+                    item.date
+                    ? `
+                        <div class="date">
+                            🕒 ${item.date}
+                        </div>
+                    `
+                    : ""
+                }
+
+            `;
+
+
+            box.appendChild(div);
+
+        });
+
+    });
+
+
+    if (!found) {
+
+        box.innerHTML =
+        "<p>📭 Geen meldingen.</p>";
+
+    }
+
+}
+
+
+/* =====================================================
+   PINCODE WIJZIGINGEN
+===================================================== */
+
+function renderPinChanges() {
+
+    const box =
+    document.getElementById(
+        "pinChanges"
+    );
+
+    box.innerHTML = "";
+
+
+    if (pinChanges.length === 0) {
+
+        box.innerHTML =
+        "<p>📭 Geen pincodewijzigingen.</p>";
+
+        return;
+
+    }
+
+
+    pinChanges.forEach(change => {
+
+        const div =
+        document.createElement("div");
+
+
+        div.className =
+        "history";
+
+
+        div.innerHTML = `
+
+            🚨
+            <strong>
+                ${escapeHtml(change.person)}
+            </strong>
+
+            <br>
+
+            Oude pincode:
+            <span class="pin">
+                ${change.oldPin}
+            </span>
+
+            <br>
+
+            Nieuwe pincode:
+            <span class="pin">
+                ${change.newPin}
+            </span>
+
+            <div class="date">
+                🕒 ${change.date}
+            </div>
+
+        `;
+
+
+        box.appendChild(div);
+
+    });
+
+}
+
+
+/* =====================================================
+   MELDING NAAR IEDEREEN
+===================================================== */
+
+function sendBroadcast() {
+
+    const text =
+    document.getElementById(
+        "broadcastMessage"
+    ).value.trim();
+
+
+    const result =
+    document.getElementById(
+        "broadcastResult"
+    );
+
+
+    if (!text) {
+
+        result.textContent =
+        "❌ Typ eerst een melding.";
+
+        return;
+
+    }
+
+
+    const date =
+    new Date().toLocaleString(
+        "nl-BE"
+    );
+
+
+    Object.keys(accounts)
+    .forEach(name => {
+
+        notifications[name].unshift({
+
+            type: "system",
+
+            from: ADMIN_NAME,
+
+            text:
+            "📢 " + text,
+
+            date: date
+
+        });
+
+    });
+
+
+    saveData();
+
+
+    result.textContent =
+    "✅ Melding naar iedereen gestuurd.";
+
+
+    document.getElementById(
+        "broadcastMessage"
+    ).value = "";
+
+
+    refreshAdmin();
+
+}
+
+
+/* =====================================================
+   ALGEMEEN BERICHT
+===================================================== */
+
+function setGeneralMessage() {
+
+    const text =
+    document.getElementById(
+        "generalMessageInput"
+    ).value.trim();
+
+
+    if (!text) {
+        return;
+    }
+
+
+    generalMessage =
+    text;
+
+
+    saveData();
+
+    renderCurrentGeneralMessage();
+
+}
+
+
+function removeGeneralMessage() {
+
+    generalMessage =
+    "";
+
+
+    saveData();
+
+    renderCurrentGeneralMessage();
+
+}
+
+
+function renderCurrentGeneralMessage() {
+
+    const box =
+    document.getElementById(
+        "currentGeneralMessage"
+    );
+
+
+    if (!generalMessage) {
+
+        box.innerHTML =
+        "<p>📭 Geen algemeen bericht.</p>";
+
+        return;
+
+    }
+
+
+    box.innerHTML = `
+
+        <div class="melding">
+
+            🏦
+            <strong>
+                Huidig algemeen bericht
+            </strong>
+
+            <br><br>
+
+            ${escapeHtml(generalMessage)}
+
+        </div>
+
+    `;
+
+}
+
+
+/* =====================================================
+   ADMIN VERVERSEN
+===================================================== */
+
+function refreshAdmin() {
+
+    renderAdminDashboard();
+
+    renderAdminPeople();
+
+    renderAdminMessages();
+
+    renderAdminRequests();
+
+    renderAccountsAdmin();
+
+    renderAllTransactions();
+
+    renderAllNotifications();
+
+    renderPinChanges();
+
+    renderCurrentGeneralMessage();
+
+}
+
+
+/* =====================================================
+   UITLOGGEN
+===================================================== */
+
+function logout() {
+
+    loggedIn =
+    null;
+
+    adminMode =
+    false;
+
+
+    document
+    .querySelectorAll(".container")
+    .forEach(element => {
+
+        element.classList.add(
+            "hidden"
+        );
+
+    });
+
+
+    document
+    .getElementById("loginScreen")
+    .classList.remove("hidden");
+
+
+    document.getElementById(
+        "loginPin"
+    ).value = "";
+
+
+    document.getElementById(
+        "loginPerson"
+    ).value = "";
+
+
+    fillLoginList();
+
+}
+
+
+/* =====================================================
+   ALLEEN CIJFERS IN PINCODE
+===================================================== */
+
+[
+    "loginPin",
+    "oldPin",
+    "newPin",
+    "newPinAgain",
+    "newPin"
+]
+.forEach(id => {
+
+    const element =
+    document.getElementById(id);
+
+
+    if (element) {
+
+        element.addEventListener(
+            "input",
+            function() {
+
+                this.value =
+                this.value
+                .replace(/\D/g, "")
+                .slice(0, 4);
+
+            }
+        );
+
+    }
+
+});
+
+
+/* =====================================================
+   HTML VEILIG TONEN
+===================================================== */
+
+function escapeHtml(value) {
+
+    return String(value)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+
+}
+
+
+function escapeJs(value) {
+
+    return String(value)
+    .replaceAll("\\", "\\\\")
+    .replaceAll("'", "\\'");
+
+}
+
+
+/* =====================================================
+   START
+===================================================== */
+
+saveData();
+
+fillLoginList();
+
+</script>
+
+</body>
+</html>
